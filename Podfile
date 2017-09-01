@@ -5,7 +5,33 @@ target 'rxrendevu' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+
   # Pods for rxrendevu
+
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'NSObject+Rx'
+    pod 'RealmSwift'
+    pod 'RxRealm'
+    pod 'Unbox'
+    pod 'Then'
+    pod 'Reachability'
+    pod 'Kingfisher'
+    pod 'RxRealmDataSources'
+    pod "SwiftDDP"
+    pod 'ViewDeck'
+    pod 'TPKeyboardAvoiding'
+    pod 'LoremIpsum'
+    pod 'GoogleMaps'
+    pod 'GooglePlaces'
+    pod 'Toast-Swift', '~> 2.0.0'
+    pod 'DropDown'
+ # pod 'Google-Material-Design-Icons-Swift'
+    pod 'Font-Awesome-Swift'
+    pod 'SwiftSoup'
+    pod 'SlackTextViewController'
+    pod 'SeaseAssist'
+    pod 'Cloudinary', '~> 2.0'
 
   target 'rxrendevuTests' do
     inherit! :search_paths
@@ -17,4 +43,15 @@ target 'rxrendevu' do
     # Pods for testing
   end
 
+end
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'RxSwift'
+      target.build_configurations.each do |config|
+        if config.name == 'Debug'
+          config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+        end
+      end
+    end
+  end
 end
