@@ -604,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C59CAACF467D6DEFD62F98FD /* Pods-rxrendevu.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UN3VABR8Q8;
 				INFOPLIST_FILE = rxrendevu/Info.plist;
@@ -618,6 +619,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0CF1E3B113686678A992FEF0 /* Pods-rxrendevu.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UN3VABR8Q8;
 				INFOPLIST_FILE = rxrendevu/Info.plist;
@@ -709,6 +711,7 @@
 				28971B891F59F5A500EB19FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28971B8A1F59F5A500EB19FD /* Build configuration list for PBXNativeTarget "rxrendevuTests" */ = {
 			isa = XCConfigurationList;
@@ -717,6 +720,7 @@
 				28971B8C1F59F5A500EB19FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28971B8D1F59F5A500EB19FD /* Build configuration list for PBXNativeTarget "rxrendevuUITests" */ = {
 			isa = XCConfigurationList;
@@ -725,6 +729,7 @@
 				28971B8F1F59F5A500EB19FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
