@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42841F59FC23008C01C3 /* RXSwiftDDP.swift */; };
+		286C42871F59FC6C008C01C3 /* RVProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42861F59FC6C008C01C3 /* RVProvider.swift */; };
+		286C42891F59FDDF008C01C3 /* RVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42881F59FDDF008C01C3 /* RVError.swift */; };
+		286C428B1F5A06E7008C01C3 /* RVConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C428A1F5A06E7008C01C3 /* RVConfiguration.swift */; };
+		286C428D1F5A10D3008C01C3 /* RVMeteorCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C428C1F5A10D3008C01C3 /* RVMeteorCredentials.swift */; };
+		286C428F1F5A11FE008C01C3 /* RVEJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C428E1F5A11FE008C01C3 /* RVEJSON.swift */; };
 		28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B621F59F5A500EB19FD /* AppDelegate.swift */; };
 		28971B651F59F5A500EB19FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B641F59F5A500EB19FD /* ViewController.swift */; };
 		28971B681F59F5A500EB19FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28971B661F59F5A500EB19FD /* Main.storyboard */; };
@@ -38,6 +44,12 @@
 
 /* Begin PBXFileReference section */
 		0CF1E3B113686678A992FEF0 /* Pods-rxrendevu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rxrendevu.release.xcconfig"; path = "Pods/Target Support Files/Pods-rxrendevu/Pods-rxrendevu.release.xcconfig"; sourceTree = "<group>"; };
+		286C42841F59FC23008C01C3 /* RXSwiftDDP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXSwiftDDP.swift; sourceTree = "<group>"; };
+		286C42861F59FC6C008C01C3 /* RVProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVProvider.swift; sourceTree = "<group>"; };
+		286C42881F59FDDF008C01C3 /* RVError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVError.swift; sourceTree = "<group>"; };
+		286C428A1F5A06E7008C01C3 /* RVConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVConfiguration.swift; sourceTree = "<group>"; };
+		286C428C1F5A10D3008C01C3 /* RVMeteorCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVMeteorCredentials.swift; sourceTree = "<group>"; };
+		286C428E1F5A11FE008C01C3 /* RVEJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVEJSON.swift; sourceTree = "<group>"; };
 		28971B5F1F59F5A500EB19FD /* rxrendevu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rxrendevu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28971B621F59F5A500EB19FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28971B641F59F5A500EB19FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +111,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		286C42821F59FBD8008C01C3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				286C42831F59FBE2008C01C3 /* Meteor */,
+				286C42881F59FDDF008C01C3 /* RVError.swift */,
+				286C428A1F5A06E7008C01C3 /* RVConfiguration.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		286C42831F59FBE2008C01C3 /* Meteor */ = {
+			isa = PBXGroup;
+			children = (
+				286C42841F59FC23008C01C3 /* RXSwiftDDP.swift */,
+				286C42861F59FC6C008C01C3 /* RVProvider.swift */,
+				286C428C1F5A10D3008C01C3 /* RVMeteorCredentials.swift */,
+				286C428E1F5A11FE008C01C3 /* RVEJSON.swift */,
+			);
+			name = Meteor;
+			sourceTree = "<group>";
+		};
 		28971B561F59F5A500EB19FD = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +157,7 @@
 		28971B611F59F5A500EB19FD /* rxrendevu */ = {
 			isa = PBXGroup;
 			children = (
+				286C42821F59FBD8008C01C3 /* Services */,
 				28971B621F59F5A500EB19FD /* AppDelegate.swift */,
 				28971B641F59F5A500EB19FD /* ViewController.swift */,
 				28971B661F59F5A500EB19FD /* Main.storyboard */,
@@ -449,8 +483,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				286C42871F59FC6C008C01C3 /* RVProvider.swift in Sources */,
+				286C428D1F5A10D3008C01C3 /* RVMeteorCredentials.swift in Sources */,
+				286C42891F59FDDF008C01C3 /* RVError.swift in Sources */,
+				286C428B1F5A06E7008C01C3 /* RVConfiguration.swift in Sources */,
 				28971B651F59F5A500EB19FD /* ViewController.swift in Sources */,
+				286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */,
 				28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */,
+				286C428F1F5A11FE008C01C3 /* RVEJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
