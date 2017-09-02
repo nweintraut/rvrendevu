@@ -10,6 +10,7 @@ target 'rxrendevu' do
 
     pod 'RxSwift'
     pod 'RxCocoa'
+    pod 'Action'
     pod 'NSObject+Rx'
     pod 'RealmSwift'
     pod 'RxRealm'
