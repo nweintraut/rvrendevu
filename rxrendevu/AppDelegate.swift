@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         print("In \(self.classForCoder).didFinish.... RxSwift Resources: \(RxSwift.Resources.total)")
+        RVViewDeck.sharedInstance.initialize(appDelegate: self)
         RVSwiftDDP.initialize()
         return true
     }
