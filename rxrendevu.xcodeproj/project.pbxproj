@@ -34,6 +34,8 @@
 		28971B6D1F59F5A500EB19FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28971B6B1F59F5A500EB19FD /* LaunchScreen.storyboard */; };
 		28971B781F59F5A500EB19FD /* rxrendevuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B771F59F5A500EB19FD /* rxrendevuTests.swift */; };
 		28971B831F59F5A500EB19FD /* rxrendevuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B821F59F5A500EB19FD /* rxrendevuUITests.swift */; };
+		28FCEADE1F5BBAA000B0FA7A /* RVMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCEADD1F5BBAA000B0FA7A /* RVMainViewController.swift */; };
+		28FCEAE11F5BBD5200B0FA7A /* RVMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCEAE01F5BBD5200B0FA7A /* RVMenuViewController.swift */; };
 		5E488B9FE804D20861A34D61 /* Pods_rxrendevuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4986C937DA99C630A2D0993F /* Pods_rxrendevuTests.framework */; };
 		79994DF636ACE09613DC3F65 /* Pods_rxrendevu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6B80DE0BEB3244F6DDA030 /* Pods_rxrendevu.framework */; };
 		942568694101B5B569A3261B /* Pods_rxrendevuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6327E7A1E9D11487E8C89F /* Pods_rxrendevuUITests.framework */; };
@@ -91,6 +93,8 @@
 		28971B7E1F59F5A500EB19FD /* rxrendevuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rxrendevuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28971B821F59F5A500EB19FD /* rxrendevuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rxrendevuUITests.swift; sourceTree = "<group>"; };
 		28971B841F59F5A500EB19FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28FCEADD1F5BBAA000B0FA7A /* RVMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVMainViewController.swift; sourceTree = "<group>"; };
+		28FCEAE01F5BBD5200B0FA7A /* RVMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVMenuViewController.swift; sourceTree = "<group>"; };
 		3B0D2776A1F853466BAEC769 /* Pods-rxrendevuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rxrendevuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rxrendevuTests/Pods-rxrendevuTests.release.xcconfig"; sourceTree = "<group>"; };
 		4986C937DA99C630A2D0993F /* Pods_rxrendevuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rxrendevuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73670200DF9D2C0147CB3D98 /* Pods-rxrendevuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rxrendevuUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rxrendevuUITests/Pods-rxrendevuUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		28971B611F59F5A500EB19FD /* rxrendevu */ = {
 			isa = PBXGroup;
 			children = (
+				28FCEADF1F5BBD4300B0FA7A /* MenuScene */,
+				28FCEADC1F5BBA8E00B0FA7A /* MainScene */,
 				286C42AC1F5B9787008C01C3 /* BaseClasses */,
 				286C429D1F5B8BF3008C01C3 /* ViewDeck */,
 				286C429C1F5B8BDB008C01C3 /* Utility */,
@@ -266,6 +272,22 @@
 				28971B841F59F5A500EB19FD /* Info.plist */,
 			);
 			path = rxrendevuUITests;
+			sourceTree = "<group>";
+		};
+		28FCEADC1F5BBA8E00B0FA7A /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				28FCEADD1F5BBAA000B0FA7A /* RVMainViewController.swift */,
+			);
+			name = MainScene;
+			sourceTree = "<group>";
+		};
+		28FCEADF1F5BBD4300B0FA7A /* MenuScene */ = {
+			isa = PBXGroup;
+			children = (
+				28FCEAE01F5BBD5200B0FA7A /* RVMenuViewController.swift */,
+			);
+			name = MenuScene;
 			sourceTree = "<group>";
 		};
 		A80814BDED1969F129C78213 /* Pods */ = {
@@ -566,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				286C42871F59FC6C008C01C3 /* RVProvider.swift in Sources */,
+				28FCEADE1F5BBAA000B0FA7A /* RVMainViewController.swift in Sources */,
 				286C428D1F5A10D3008C01C3 /* RVMeteorCredentials.swift in Sources */,
 				286C42891F59FDDF008C01C3 /* RVError.swift in Sources */,
 				286C42A71F5B8DAC008C01C3 /* RVControllerProfile.swift in Sources */,
@@ -581,6 +604,7 @@
 				286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */,
 				28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */,
 				286C42A51F5B8D66008C01C3 /* RVControllerFactory.swift in Sources */,
+				28FCEAE11F5BBD5200B0FA7A /* RVMenuViewController.swift in Sources */,
 				286C42931F5A7FE0008C01C3 /* String+Extension.swift in Sources */,
 				286C428F1F5A11FE008C01C3 /* RVEJSON.swift in Sources */,
 				286C42961F5B7651008C01C3 /* RVBaseModel.swift in Sources */,
