@@ -9,13 +9,15 @@
 import UIKit
 import SwiftDDP
 import RxSwift
-import RxCocoa
+import Action
+import NSObject_Rx
 
 enum RVSwiftDDPErrorReason: String {
     case Incorrect_Password = "Incorrect password"
     case User_Not_Found     = "User not found"
 }
 
+let globalScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
 class RVSwiftDDP: Meteor {
     class func classForCoder() -> String { return "RVSwiftDDP" }
     static var bag = DisposeBag()
@@ -27,11 +29,60 @@ class RVSwiftDDP: Meteor {
         client.allowSelfSignedSSL = true
         client.logLevel = .info
         setupObserver()
-        connect()
+        RVMeteorService.sharedInstance.connect {
+
+            if RVSwiftDDP.loggedIn {
+                print("In \(self.classForCoder()).connect, Logged In as: userId: \(RVSwiftDDP.loggedInId ?? "No Id"), user: \(RVSwiftDDP.username ?? "No username")")
+                /*
+                let username = "ttt@t.com"
+                loginStuff.onNext("Logging with username: \(username)")
+                Meteor.loginWithPassword(username, password: "password", callback: { (result, error) in
+                    if let error = error {
+                        loginStuff.onError(error)
+                    } else if let payload = result as? [String: AnyObject] {
+                        loginStuff.onNext("\(RVMeteorCredentials(payload: payload).toString())")
+                    } else {
+                        loginStuff.onNext("nothing)")
+                    }
+                })
+ */
+            } else {
+                print("In \(self.classForCoder()).connect, no error but not logged in after connect")
+            }
+           
+        }
+        //connect()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(DDP_USER_DID_LOGIN), object: nil , queue: nil) { (notification: Notification) in
             if let username = Meteor.client.user() {
                 loginStuff.onNext("In RVSwiftDDP.initialize DDP_USER_DID_LOGIN notification callback: \(username) and userId: \(client.userId() ?? "no userId")")
                 //print("In RVSwiftDDP.initialize DDP_USER_DID_LOGIN notification callback, username \(username)")
+
+                let observable: Observable<RVUserProfile?> = RVUserProfile.getOrCreateUserProfile(username: username)
+                observable
+                .subscribeOn(MainScheduler.instance)
+                .observeOn(globalScheduler)
+                .subscribe(onNext: { (profile) in
+                    if let _ = profile {
+                        print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, have profile for username: \(RVSwiftDDP.username ?? "no username")")
+                    } else {
+                        print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, no profile for username: \(RVSwiftDDP.username ?? "no username")")
+                    }
+                }, onError: { (error ) in
+                    if let error = error as? RVError {
+                         print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, have error \n\(error.toString())")
+                    } else {
+                         print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, have error \n\(error)")
+                    }
+                   
+                }, onCompleted: { profile in
+                    //print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, COMPLELTED username: \(RVSwiftDDP.username ?? "no username")")
+                }, onDisposed: {
+                    //print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, disposing")
+                })
+                .disposed(by: self.bag)
+                //
+                
+        
             } else {
                 print("In RVSwiftDDP.initialize DDP_USER_DID_LOGIN notifivcation callback, no username")
             }
@@ -54,6 +105,7 @@ class RVSwiftDDP: Meteor {
             print("In RXSwiftDDP DDP_FAILED notification callback")
         }
     }
+
     private class func setupObserver() {
         loginStuff.subscribe(
             onNext: {print("onNext: \($0)")},
@@ -62,8 +114,11 @@ class RVSwiftDDP: Meteor {
             onDisposed: { print("LoginOutPublisher Disposed") }
             ).disposed(by: bag)
     }
-    class func getId() -> String { return Meteor.client.getId() }
+    static var loggedInId:  String?  { return Meteor.client.userId()    }
+    static var loggedIn:    Bool    { return Meteor.client.loggedIn() }
+    static var username:    String? { return Meteor.client.user()     }
     
+    /*
     class func connect() {
         let interval: TimeInterval = 4.0
         let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { (timer) in
@@ -71,7 +126,7 @@ class RVSwiftDDP: Meteor {
         }
         super.connect(RVConfiguration.sharedInstance.baseServer) { 
             timer.invalidate()
-            if let username = client.user() {
+            if let _ = client.user() {
                  //loginStuff.onNext("Already Logged in with username: \(username) and userId: \(client.userId())")
                 logout()
             } else {
@@ -90,6 +145,8 @@ class RVSwiftDDP: Meteor {
         }
         
     }
+*/
+    
     
 
 }
