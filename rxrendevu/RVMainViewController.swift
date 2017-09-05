@@ -8,11 +8,14 @@
 
 import UIKit
 import NSObject_Rx
+import RxSwift
 
 class RVMainViewController: RVBaseViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
+
+         print("In \(self.classForCoder).viewDidLoad \(Date().timeIntervalSince1970)")
         super.viewDidLoad()
         setupMenuButton()
         
@@ -20,10 +23,11 @@ class RVMainViewController: RVBaseViewController {
     func setupMenuButton() {
         if let button = menuButton {
             button.rx.tap
-            .subscribe(onNext: { _ in
-                RVViewDeck.sharedInstance.toggleSide(side: .left)
-            })
-            .disposed(by: rx_disposeBag)
+                .throttle(0.3, scheduler: MainScheduler.instance)
+                .subscribe(onNext: { _ in
+                    let _ = RVViewDeck.sharedInstance.startNewRoute(newRoute: RVRoute().appendPath(path: RVRoutePath(scene: .menu, parameter: nil, model: nil)))
+                })
+                .disposed(by: rx_disposeBag)
         }
     }
 }

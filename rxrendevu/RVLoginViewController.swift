@@ -8,5 +8,8 @@
 
 import UIKit
 class RVLoginViewController: RVBaseViewController {
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("In \(self.classForCoder).viewWillDisappear \(Date().timeIntervalSince1970)")
+        super.viewWillDisappear(animated)
+    }
 }

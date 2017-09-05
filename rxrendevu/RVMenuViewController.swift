@@ -24,7 +24,8 @@ class RVMenuViewController: RVBaseViewController {
             button.rx.tap
                 .throttle(0.3, scheduler: MainScheduler.instance)
                 .subscribe(onNext: { _ in
-                    RVViewDeck.sharedInstance.toggleSide(side: .left)
+                    //RVViewDeck.sharedInstance.toggleSide(side: .left)
+                    _ = RVRouter.sharedInstance.startNewRoute(newRoute: RVRoute().appendPath(path: RVRoutePath(scene: .home, parameter: nil, model: nil)))
                 })
                 .disposed(by: rx_disposeBag)
         }

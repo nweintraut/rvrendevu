@@ -11,7 +11,7 @@ import UIKit
 class RVControllerFactory: NSObject {
     static let sharedInstance = {return RVControllerFactory() }()
     var storyboards = [String : UIStoryboard]()
-
+    var home: UIViewController!
     var profiles: [RVKey: RVControllerProfile] = [
         .menu   : RVControllerProfile(storyboard: "Main", identifier: RVKey.menu.rawValue),
         .home   : RVControllerProfile(storyboard: "Main", identifier: RVKey.home.rawValue),
@@ -34,7 +34,11 @@ class RVControllerFactory: NSObject {
         if let storyboard = self.storyboards[controllerProfile.storyboard] { return storyboard }
         let storyboard = UIStoryboard(name: controllerProfile.storyboard, bundle: controllerProfile.bundle)
         self.storyboards[controllerProfile.storyboard] = storyboard
+        
         return storyboard
+    }
+    func plug() {
+        home = instantiateController(controllerProfile: RVControllerProfile(storyboard: "Main", identifier: RVKey.home.rawValue))
     }
     func instantiateController(controllerProfile: RVControllerProfile) -> UIViewController {
         return getStoryboard(controllerProfile: controllerProfile).instantiateViewController(withIdentifier: controllerProfile.identifier)

@@ -10,7 +10,7 @@ import Foundation
 
 class RVRouter {
     private var routes: [RVRoute] = [RVRoute]()
-    
+    static let sharedInstance: RVRouter = { return RVRouter() }()
     
     func pushRoute(route: RVRoute) {
         self.routes.insert(route, at: 0)
@@ -31,5 +31,11 @@ class RVRouter {
     }
     func emptyRoutes() {
         self.routes = [RVRoute]()
+    }
+    func startNewRoute(newRoute: RVRoute) -> Bool {
+        return RVViewDeck.sharedInstance.startNewRoute(newRoute: newRoute)
+    }
+    func markEndOfRoute() {
+        RVViewDeck.sharedInstance.newRouteInProcess = false
     }
 }
