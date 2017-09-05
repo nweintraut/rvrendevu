@@ -33,6 +33,7 @@ target 'rxrendevu' do
     pod 'SlackTextViewController'
     pod 'SeaseAssist'
     pod 'Cloudinary', '~> 2.0'
+    pod 'IHKeyboardAvoiding'
 
   target 'rxrendevuTests' do
     inherit! :search_paths

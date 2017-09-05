@@ -91,6 +91,7 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
         return deckController
     }
     func startNewRoute(newRoute: RVRoute) -> Bool {
+        return false // Neil
         // Neil add sync lock around this
         if newRouteInProcess { return false }
         newRouteInProcess = true
