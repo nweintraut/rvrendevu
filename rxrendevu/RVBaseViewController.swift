@@ -7,9 +7,15 @@
 //
 
 import UIKit
-class RVBaseViewController: UIViewController {
+import NSObject_Rx
+
+class RVBaseViewController: UIViewController, RVControllerProtocol {
     private var profile: RVControllerProfile? = nil
+    internal        var childControllerProfile: RVControllerProfile?    = nil
+    internal weak   var childController:        UIViewController?       = nil
     static let identifier: String = { "\(classForCoder())" }()
+    
+    
     func installConfig(profile: RVControllerProfile) {
         self.profile = profile
     }

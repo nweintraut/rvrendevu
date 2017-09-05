@@ -33,6 +33,7 @@
 		286EFE141F5D120500FAB2DC /* RVAsyncRouteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE131F5D120500FAB2DC /* RVAsyncRouteOperation.swift */; };
 		286EFE161F5D162400FAB2DC /* RVViewDeckRouteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE151F5D162400FAB2DC /* RVViewDeckRouteOperation.swift */; };
 		286EFE191F5D205300FAB2DC /* RVLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE181F5D205300FAB2DC /* RVLoginViewController.swift */; };
+		2885BF141F5E397C00AB66A8 /* RVControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885BF131F5E397C00AB66A8 /* RVControllerProtocol.swift */; };
 		28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B621F59F5A500EB19FD /* AppDelegate.swift */; };
 		28971B651F59F5A500EB19FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28971B641F59F5A500EB19FD /* ViewController.swift */; };
 		28971B681F59F5A500EB19FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28971B661F59F5A500EB19FD /* Main.storyboard */; };
@@ -95,6 +96,7 @@
 		286EFE131F5D120500FAB2DC /* RVAsyncRouteOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVAsyncRouteOperation.swift; sourceTree = "<group>"; };
 		286EFE151F5D162400FAB2DC /* RVViewDeckRouteOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVViewDeckRouteOperation.swift; sourceTree = "<group>"; };
 		286EFE181F5D205300FAB2DC /* RVLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVLoginViewController.swift; sourceTree = "<group>"; };
+		2885BF131F5E397C00AB66A8 /* RVControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVControllerProtocol.swift; sourceTree = "<group>"; };
 		28971B5F1F59F5A500EB19FD /* rxrendevu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rxrendevu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28971B621F59F5A500EB19FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28971B641F59F5A500EB19FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				286C42AA1F5B95BB008C01C3 /* RVBaseViewController.swift */,
 				286C42AD1F5B9CA3008C01C3 /* RVBaseNavController.swift */,
 				286C42AF1F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift */,
+				2885BF131F5E397C00AB66A8 /* RVControllerProtocol.swift */,
 			);
 			name = BaseClasses;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				286C42A51F5B8D66008C01C3 /* RVControllerFactory.swift in Sources */,
 				286EFE161F5D162400FAB2DC /* RVViewDeckRouteOperation.swift in Sources */,
 				28BF4F321F5C681700E3FF1D /* RVRouter.swift in Sources */,
+				2885BF141F5E397C00AB66A8 /* RVControllerProtocol.swift in Sources */,
 				286EFE191F5D205300FAB2DC /* RVLoginViewController.swift in Sources */,
 				286EFE101F5D0DAA00FAB2DC /* RVAsyncOperation.swift in Sources */,
 				28FCEAE11F5BBD5200B0FA7A /* RVMenuViewController.swift in Sources */,

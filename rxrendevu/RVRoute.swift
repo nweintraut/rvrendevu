@@ -17,6 +17,7 @@ class RVRoute {
         if (level >= routePaths.count) || (level < 0) { return nil }
         return routePaths[level]
     }
+    var pathDepth: Int { return routePaths.count }
     func clone() -> RVRoute {
         let route = RVRoute()
         for path in self.routePaths {_ = route.appendPath(path: path) }

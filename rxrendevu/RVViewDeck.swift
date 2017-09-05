@@ -14,8 +14,10 @@ enum RVViewDeckSide {
     case right
     case center
 }
-class RVViewDeck: RVNSObject {
+class RVViewDeck: RVNSObject, RVControllerProtocol {
     static let sharedInstance: RVViewDeck = { return RVViewDeck()} ()
+    internal        var childControllerProfile: RVControllerProfile?    = nil
+    internal weak   var childController:        UIViewController?       = nil
     var deckController: IIViewDeckController = IIViewDeckController()
     
     let router = RVRouter()
@@ -67,12 +69,19 @@ class RVViewDeck: RVNSObject {
         } else {
             print("In \(self.instanceType).generateControllerStack, failed to get LeftController")
         }
-        self.router.pushRoute(route: RVRoute().appendPath(path: RVRoutePath(scene: .login, parameter: nil, model: nil)))
-        if let controller = RVControllerFactory.sharedInstance.getController(key: .login) {
-            centerController = controller
-            self.childVC = controller
+        let key = RVKey.login
+        self.router.pushRoute(route: RVRoute().appendPath(path: RVRoutePath(scene: key, parameter: nil, model: nil)))
+        if let profile = RVControllerFactory.sharedInstance.profiles[key] {
+            if let controller = RVControllerFactory.sharedInstance.getController(profile: profile) {
+                centerController = controller
+                self.childControllerProfile = profile
+                self.childController = controller
+            } else {
+                 print("In \(self.instanceType).generateControllerStack, failed to get CenterController for \(key.rawValue)")
+            }
         } else {
-            print("In \(self.instanceType).generateControllerStack, failed to get CenterController")
+            print("In \(self.classForCoder).generateControllerStack, could not find profile for \(key.rawValue)")
+           
         }
         let deckController = IIViewDeckController(center: centerController, leftViewController: leftController)
         deckController.preferredContentSize = CGSize(width: 200, height: centerController.view.bounds.height)
@@ -89,47 +98,73 @@ class RVViewDeck: RVNSObject {
         return true
     }
 
-    weak var childVC: UIViewController? = nil
+
     
 }
 extension RVViewDeck {
+    func bubbleUp(pathLevel: Int, newRoute: RVRoute, newProfile: RVControllerProfile, controller: UIViewController) {
+        if newRoute.pathDepth - 1 == pathLevel {
+            RVViewDeck.sharedInstance.newRouteInProcess = false
+        } else {
+            print("In \(self.classForCoder).bubbleUp, pathDepth is \(newRoute.pathDepth). Neil need to implement")
+        }
+        
+    }
     func newRoute(pathLevel: Int) {
-        if let newRoute = RVViewDeck.sharedInstance.router.getTopRoute() {
+        if let newRoute: RVRoute = RVViewDeck.sharedInstance.router.getTopRoute() {
             if let path = newRoute.getPath(level: pathLevel) {
-                var controllerAlreadyExists: Bool = false
-                if let profile = RVControllerFactory.sharedInstance.profiles[path.scene] {
-                    if RVControllerFactory.sharedInstance.sameController(newProfile: profile , candidate: self.childVC) {
-                        controllerAlreadyExists = true
-                    }
-                    if !controllerAlreadyExists {
-                        switch (path.scene) {
-                        case .login:
-                            print("Login")
-                            if let controller = RVControllerFactory.sharedInstance.getController(profile: profile) {
-                                centerViewController = controller
-                                RVViewDeck.sharedInstance.newRouteInProcess = false
-                            } else {
-                                print("In \(self.instanceType).newRoute, failed to get CenterController")
-                            }
-                        case .menu:
-                            print("Menu")
-                        case .home:
-                            let time = Date()
-                            print("Home")
-                            if let controller = RVControllerFactory.sharedInstance.getController(profile: profile) {
-                                centerViewController = controller
-                                RVViewDeck.sharedInstance.newRouteInProcess = false
-                            } else {
-                                print("In \(self.instanceType).newRoute, failed to get CenterController")
-                            }
-                        default:
-                            print("Default")
-                        }
+                if path.scene == .menu {
+                    if self.deckController.openSide != .left {
+                        self.openSide(side: .left)
                     } else {
-                        //
+                        print("In \(self.classForCoder).newRoute line #\(#line) attempted to go to menu when already open. Neil to implement.")
                     }
+                    RVViewDeck.sharedInstance.newRouteInProcess = false
                 } else {
-                    print("In \(self.classForCoder).newPath, no profile found for \(path.scene)")
+                    var controllerAlreadyExists: Bool = false
+                    if let newProfile: RVControllerProfile = RVControllerFactory.sharedInstance.profiles[path.scene] {
+                        if let currentChildProfile = self.childControllerProfile {
+                            if currentChildProfile.match(candidate: newProfile) {
+                                controllerAlreadyExists = true
+                            } else {
+                                print("In \(self.classForCoder) currentChildProfile: \(currentChildProfile.identifier), did not match newProfile: \(newProfile.identifier)")
+                            }
+                        } else {
+                            print("In \(self.classForCoder).newRoute, did not find a currentChildProfile")
+                        }
+                        if self.deckController.openSide != .none { self.toggleSide(side: .center) }
+                        if !controllerAlreadyExists {
+                            print("In \(self.classForCoder).newRoute path.scene \(path.scene.rawValue)")
+                            switch (path.scene) {
+                            case .login:
+                                if let controller = RVControllerFactory.sharedInstance.getController(profile: newProfile) {
+                                    centerViewController = controller
+                                    self.childControllerProfile = newProfile
+                                    self.childController = controller
+                                    RVViewDeck.sharedInstance.newRouteInProcess = false
+                                } else {
+                                    print("In \(self.instanceType).newRoute, failed to get CenterController")
+                                }
+                            case .home:
+                                if let controller = RVControllerFactory.sharedInstance.getController(profile: newProfile) {
+                                    centerViewController = controller
+                                    self.childControllerProfile = newProfile
+                                    self.childController = controller
+                                    // Neil BUBBLE UP GOES HERE....
+                                    self.bubbleUp(pathLevel: pathLevel, newRoute: newRoute, newProfile: newProfile, controller: controller)
+                                } else {
+                                    print("In \(self.instanceType).newRoute, failed to get CenterController")
+                                }
+                            default:
+                                print("In \(self.classForCoder).newRoute path.scene \(path.scene) fell through to Default")
+                            }
+                        } else {
+                            // matched so don't need to change controller; bubble up stuff
+                        }
+
+                    } else {
+                        print("In \(self.classForCoder).newPath, no profile found for \(path.scene)")
+                    }
                 }
             } else {
                 print("In \(self.classForCoder).newPath, no path found at \(pathLevel)")
@@ -137,7 +172,6 @@ extension RVViewDeck {
         } else {
             print("In \(self.classForCoder).newRoute, no route found ")
         }
-        
     }
 }
 extension RVViewDeck: IIViewDeckControllerDelegate {
