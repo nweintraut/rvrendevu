@@ -114,6 +114,7 @@ extension RVViewDeck {
                         case .menu:
                             print("Menu")
                         case .home:
+                            let time = Date()
                             print("Home")
                             if let controller = RVControllerFactory.sharedInstance.getController(profile: profile) {
                                 centerViewController = controller
