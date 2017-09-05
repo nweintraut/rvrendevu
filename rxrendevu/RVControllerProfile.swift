@@ -11,10 +11,12 @@ import UIKit
 class RVControllerProfile: RVNSObject {
     var storyboard: String
     var identifier: String
+    var bundle: Bundle?
     
-    init(storyboard: String, identifier: String) {
+    init(storyboard: String, identifier: String, bundle: Bundle? = nil) {
         self.storyboard = storyboard
         self.identifier = identifier
+        self.bundle = bundle
         super.init()
     }
     func match(candidate: RVControllerProfile) -> Bool {

@@ -1,5 +1,5 @@
 //
-//  RVBaseViewController.swift
+//  RVBaseNavController.swift
 //  rxrendevu
 //
 //  Created by Neil Weintraut on 9/2/17.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-class RVBaseViewController: UIViewController {
+class RVBaseNavController: UINavigationController {
     private var profile: RVControllerProfile? = nil
-    static let identifier: String = { "\(classForCoder())" }()
     func installConfig(profile: RVControllerProfile) {
         self.profile = profile
     }

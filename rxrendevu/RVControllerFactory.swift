@@ -8,37 +8,54 @@
 
 import UIKit
 
-class RVControllerFactory {
+class RVControllerFactory: NSObject {
     static let sharedInstance = {return RVControllerFactory() }()
+    var storyboards = [String : UIStoryboard]()
 
     var profiles: [RVKey: RVControllerProfile] = [
-        .menu : RVControllerProfile(storyboard: "Main", identifier: RVKey.menu.rawValue),
-        .home : RVControllerProfile(storyboard: "Main", identifier: RVKey.home.rawValue),
+        .menu   : RVControllerProfile(storyboard: "Main", identifier: RVKey.menu.rawValue),
+        .home   : RVControllerProfile(storyboard: "Main", identifier: RVKey.home.rawValue),
+        .login  : RVControllerProfile(storyboard: "Main", identifier: RVKey.login.rawValue)
     ]
 
     func getController(key: RVKey) -> UIViewController? {
         if let profile = profiles[key] {
-            return instantiateController(identifier: profile)
+            return instantiateController(controllerProfile: profile)
         }
         return nil
-
     }
-    func instantiateController(identifier: RVControllerProfile) -> UIViewController {
-        return UIStoryboard(name: identifier.storyboard, bundle: nil).instantiateViewController(withIdentifier: identifier.identifier)
-    }
-    func sameController(newProfile: RVControllerProfile, candidate: UIViewController) -> Bool {
-        var candidateProfile: RVControllerProfile? = nil
-        if let nav = candidate as? RVBaseNavController {
-            candidateProfile = nav.getProfile()
-        } else if let tab = candidate as? RVBaseTabBarViewController {
-            candidateProfile = tab.getProfile()
-        } else if let controller = candidate as? RVBaseViewController {
-            candidateProfile = controller.getProfile()
+    func getController(profile: RVControllerProfile) -> UIViewController? {
+        if let scene = RVKey(rawValue: profile.identifier) {
+            return getController(key: scene)
         }
-        if let candidateProfile = candidateProfile {
-            return newProfile.match(candidate: candidateProfile)
+        return nil
+    }
+    func getStoryboard(controllerProfile: RVControllerProfile ) -> UIStoryboard {
+        if let storyboard = self.storyboards[controllerProfile.storyboard] { return storyboard }
+        let storyboard = UIStoryboard(name: controllerProfile.storyboard, bundle: controllerProfile.bundle)
+        self.storyboards[controllerProfile.storyboard] = storyboard
+        return storyboard
+    }
+    func instantiateController(controllerProfile: RVControllerProfile) -> UIViewController {
+        return getStoryboard(controllerProfile: controllerProfile).instantiateViewController(withIdentifier: controllerProfile.identifier)
+    }
+    func sameController(newProfile: RVControllerProfile?, candidate: UIViewController?) -> Bool {
+        if let candidate = candidate {
+            if let newProfile = newProfile {
+                var candidateProfile: RVControllerProfile? = nil
+                if let nav = candidate as? RVBaseNavController {
+                    candidateProfile = nav.getProfile()
+                } else if let tab = candidate as? RVBaseTabBarViewController {
+                    candidateProfile = tab.getProfile()
+                } else if let controller = candidate as? RVBaseViewController {
+                    candidateProfile = controller.getProfile()
+                }
+                if let candidateProfile = candidateProfile {
+                    return newProfile.match(candidate: candidateProfile)
+                }
+                return false
+            }
         }
         return false
     }
-
 }

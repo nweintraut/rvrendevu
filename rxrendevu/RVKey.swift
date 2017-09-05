@@ -13,4 +13,5 @@ enum RVKey: String {
     case home = "home"
     case login = "login"
     case group = "Group"
+    case nopath = "nopath"
 }

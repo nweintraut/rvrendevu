@@ -64,6 +64,8 @@ class RVSwiftDDP: Meteor {
                 .subscribe(onNext: { (profile) in
                     if let _ = profile {
                         print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, have profile for username: \(RVSwiftDDP.username ?? "no username")")
+                        let newRoute = RVRoute().appendPath(path: RVRoutePath(scene: .home, parameter: nil, model: nil))
+                        _ = RVViewDeck.sharedInstance.startNewRoute(newRoute: newRoute)
                     } else {
                         print("In RVSwiftDDP.DDP_USER_DID_LOGIN callback, no profile for username: \(RVSwiftDDP.username ?? "no username")")
                     }
