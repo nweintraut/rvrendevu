@@ -116,53 +116,78 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ai-G0-3ls" userLabel="LoginView">
                                 <rect key="frame" x="16" y="240" width="288" height="264"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcq-fs-nDK">
-                                        <rect key="frame" x="8" y="65" width="272" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d47-VT-wjm">
-                                        <rect key="frame" x="8" y="147" width="272" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Email Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c26-ii-LtG">
-                                        <rect key="frame" x="8" y="30" width="83" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Password Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBn-R2-dqk">
-                                        <rect key="frame" x="8" y="112" width="116" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebH-13-vaP" userLabel="EmailView">
+                                        <rect key="frame" x="0.0" y="22" width="288" height="88"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcq-fs-nDK">
+                                                <rect key="frame" x="8" y="56" width="272" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c26-ii-LtG">
+                                                <rect key="frame" x="8" y="29.5" width="83" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="tcq-fs-nDK" firstAttribute="leading" secondItem="ebH-13-vaP" secondAttribute="leading" constant="8" id="2dn-wp-7Yn"/>
+                                            <constraint firstAttribute="trailing" secondItem="tcq-fs-nDK" secondAttribute="trailing" constant="8" id="BU3-uX-syg"/>
+                                            <constraint firstAttribute="bottom" secondItem="tcq-fs-nDK" secondAttribute="bottom" constant="2" id="FBp-sc-AIc"/>
+                                            <constraint firstItem="tcq-fs-nDK" firstAttribute="top" secondItem="c26-ii-LtG" secondAttribute="bottom" constant="6" id="als-hw-Tb1"/>
+                                            <constraint firstAttribute="height" constant="88" id="d6q-Tz-1eM"/>
+                                            <constraint firstItem="tcq-fs-nDK" firstAttribute="leading" secondItem="c26-ii-LtG" secondAttribute="leading" id="pAY-22-N7m"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V66-QC-dcq">
-                                        <rect key="frame" x="8" y="204" width="272" height="40"/>
+                                        <rect key="frame" x="223" y="204" width="57" height="40"/>
                                         <color key="backgroundColor" red="0.20392156859999999" green="0.7843137255" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P41-3n-HPW" userLabel="PasswordView">
+                                        <rect key="frame" x="0.0" y="116" width="288" height="65"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d47-VT-wjm">
+                                                <rect key="frame" x="8" y="35" width="272" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBn-R2-dqk">
+                                                <rect key="frame" x="8" y="8.5" width="116" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="d47-VT-wjm" secondAttribute="bottom" id="8xk-H4-0Bw"/>
+                                            <constraint firstItem="d47-VT-wjm" firstAttribute="leading" secondItem="P41-3n-HPW" secondAttribute="leading" constant="8" id="PYk-us-03I"/>
+                                            <constraint firstItem="d47-VT-wjm" firstAttribute="top" secondItem="kBn-R2-dqk" secondAttribute="bottom" constant="6" id="emr-dq-z7e"/>
+                                            <constraint firstAttribute="trailing" secondItem="d47-VT-wjm" secondAttribute="trailing" constant="8" id="jIq-xc-yUt"/>
+                                            <constraint firstItem="d47-VT-wjm" firstAttribute="leading" secondItem="kBn-R2-dqk" secondAttribute="leading" id="kxn-ht-qtZ"/>
+                                            <constraint firstAttribute="height" constant="65" id="vWF-gB-xae"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="kBn-R2-dqk" firstAttribute="leading" secondItem="tcq-fs-nDK" secondAttribute="leading" id="2y3-DQ-gk8"/>
-                                    <constraint firstItem="tcq-fs-nDK" firstAttribute="top" secondItem="5ai-G0-3ls" secondAttribute="top" constant="65" id="5Cn-O6-LR7"/>
-                                    <constraint firstItem="tcq-fs-nDK" firstAttribute="leading" secondItem="c26-ii-LtG" secondAttribute="leading" id="5WO-03-E0X"/>
-                                    <constraint firstItem="V66-QC-dcq" firstAttribute="top" secondItem="d47-VT-wjm" secondAttribute="bottom" constant="27" id="LPY-QZ-VVj"/>
-                                    <constraint firstItem="V66-QC-dcq" firstAttribute="trailing" secondItem="d47-VT-wjm" secondAttribute="trailing" id="QyF-5q-phQ"/>
-                                    <constraint firstItem="d47-VT-wjm" firstAttribute="trailing" secondItem="tcq-fs-nDK" secondAttribute="trailing" id="YJs-CQ-VT9"/>
+                                    <constraint firstItem="P41-3n-HPW" firstAttribute="leading" secondItem="5ai-G0-3ls" secondAttribute="leading" id="3b4-BX-AD2"/>
+                                    <constraint firstAttribute="trailing" secondItem="P41-3n-HPW" secondAttribute="trailing" id="CVB-JE-J3s"/>
+                                    <constraint firstItem="P41-3n-HPW" firstAttribute="top" secondItem="ebH-13-vaP" secondAttribute="bottom" constant="6" id="P9w-ST-WVh"/>
+                                    <constraint firstItem="ebH-13-vaP" firstAttribute="top" secondItem="5ai-G0-3ls" secondAttribute="top" constant="22" id="Psa-hd-7Ny"/>
                                     <constraint firstAttribute="bottom" secondItem="V66-QC-dcq" secondAttribute="bottom" constant="20" id="ZIi-qZ-CKa"/>
-                                    <constraint firstAttribute="trailing" secondItem="tcq-fs-nDK" secondAttribute="trailing" constant="8" id="dIS-Iz-Chx"/>
-                                    <constraint firstItem="tcq-fs-nDK" firstAttribute="leading" secondItem="5ai-G0-3ls" secondAttribute="leading" constant="8" id="lmP-QD-b4L"/>
-                                    <constraint firstItem="V66-QC-dcq" firstAttribute="leading" secondItem="d47-VT-wjm" secondAttribute="leading" id="q2d-Q7-fDJ"/>
-                                    <constraint firstItem="d47-VT-wjm" firstAttribute="leading" secondItem="kBn-R2-dqk" secondAttribute="leading" id="qCf-IV-QK5"/>
-                                    <constraint firstItem="d47-VT-wjm" firstAttribute="top" secondItem="tcq-fs-nDK" secondAttribute="bottom" constant="52" id="s6n-iT-p7b"/>
+                                    <constraint firstAttribute="height" constant="264" id="nUx-wX-pG0"/>
+                                    <constraint firstAttribute="trailing" secondItem="ebH-13-vaP" secondAttribute="trailing" id="pOt-Rg-WoS"/>
+                                    <constraint firstAttribute="trailing" secondItem="V66-QC-dcq" secondAttribute="trailing" constant="8" id="rbw-NG-XKe"/>
+                                    <constraint firstItem="ebH-13-vaP" firstAttribute="leading" secondItem="5ai-G0-3ls" secondAttribute="leading" id="xf6-ct-6Ol"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -178,10 +203,12 @@
                     <connections>
                         <outlet property="emailMessageLabel" destination="c26-ii-LtG" id="4aF-H1-Moz"/>
                         <outlet property="emailTextField" destination="tcq-fs-nDK" id="ijn-HA-QGX"/>
+                        <outlet property="emailView" destination="ebH-13-vaP" id="763-Jq-nzY"/>
                         <outlet property="loginButton" destination="V66-QC-dcq" id="2bA-eh-15B"/>
                         <outlet property="loginView" destination="5ai-G0-3ls" id="C8S-pa-Pcx"/>
                         <outlet property="passwordMessageLabel" destination="kBn-R2-dqk" id="EzT-z5-zxM"/>
                         <outlet property="passwordTextField" destination="d47-VT-wjm" id="Btr-yU-TFf"/>
+                        <outlet property="passwordView" destination="P41-3n-HPW" id="au8-U0-Dv2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aih-FH-Hcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
