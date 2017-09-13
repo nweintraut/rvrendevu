@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2816497C1F698D4F0053F954 /* RVEmailTextEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2816497B1F698D4F0053F954 /* RVEmailTextEvaluator.swift */; };
+		2816497E1F69A8DA0053F954 /* RVLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2816497D1F69A8DA0053F954 /* RVLoginViewModel.swift */; };
+		281649801F69B32B0053F954 /* RVUserProfile+RxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2816497F1F69B32B0053F954 /* RVUserProfile+RxExtension.swift */; };
 		281703E61F684E9200F4501D /* RVTextFieldProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281703E51F684E9200F4501D /* RVTextFieldProxy.swift */; };
 		286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42841F59FC23008C01C3 /* RXSwiftDDP.swift */; };
 		286C42871F59FC6C008C01C3 /* RVProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42861F59FC6C008C01C3 /* RVProvider.swift */; };
@@ -73,6 +75,8 @@
 /* Begin PBXFileReference section */
 		0CF1E3B113686678A992FEF0 /* Pods-rxrendevu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rxrendevu.release.xcconfig"; path = "Pods/Target Support Files/Pods-rxrendevu/Pods-rxrendevu.release.xcconfig"; sourceTree = "<group>"; };
 		2816497B1F698D4F0053F954 /* RVEmailTextEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVEmailTextEvaluator.swift; sourceTree = "<group>"; };
+		2816497D1F69A8DA0053F954 /* RVLoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVLoginViewModel.swift; sourceTree = "<group>"; };
+		2816497F1F69B32B0053F954 /* RVUserProfile+RxExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RVUserProfile+RxExtension.swift"; sourceTree = "<group>"; };
 		281703E51F684E9200F4501D /* RVTextFieldProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVTextFieldProxy.swift; sourceTree = "<group>"; };
 		286C42841F59FC23008C01C3 /* RXSwiftDDP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RXSwiftDDP.swift; sourceTree = "<group>"; };
 		286C42861F59FC6C008C01C3 /* RVProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVProvider.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				286C42971F5B766B008C01C3 /* RVUserProfile.swift */,
 				286C42991F5B77E7008C01C3 /* RVMeteorMethods.swift */,
 				286C42A81F5B8E69008C01C3 /* RVKey.swift */,
+				2816497F1F69B32B0053F954 /* RVUserProfile+RxExtension.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				286EFE181F5D205300FAB2DC /* RVLoginViewController.swift */,
 				281703E51F684E9200F4501D /* RVTextFieldProxy.swift */,
 				2816497B1F698D4F0053F954 /* RVEmailTextEvaluator.swift */,
+				2816497D1F69A8DA0053F954 /* RVLoginViewModel.swift */,
 			);
 			name = LoginScene;
 			sourceTree = "<group>";
@@ -654,6 +660,7 @@
 				286C42911F5A71C3008C01C3 /* RVMeteorService.swift in Sources */,
 				286EFE121F5D0FFC00FAB2DC /* RVOperationQueue.swift in Sources */,
 				286C42981F5B766B008C01C3 /* RVUserProfile.swift in Sources */,
+				2816497E1F69A8DA0053F954 /* RVLoginViewModel.swift in Sources */,
 				286C429A1F5B77E7008C01C3 /* RVMeteorMethods.swift in Sources */,
 				286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */,
 				28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */,
@@ -672,6 +679,7 @@
 				286C42B01F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift in Sources */,
 				286EFE0E1F5D0CE800FAB2DC /* UIViewController+Extensions.swift in Sources */,
 				286C42AE1F5B9CA3008C01C3 /* RVBaseNavController.swift in Sources */,
+				281649801F69B32B0053F954 /* RVUserProfile+RxExtension.swift in Sources */,
 				286EFE141F5D120500FAB2DC /* RVAsyncRouteOperation.swift in Sources */,
 				286C42AB1F5B95BB008C01C3 /* RVBaseViewController.swift in Sources */,
 				28BF4F341F5C687100E3FF1D /* RVRoute.swift in Sources */,

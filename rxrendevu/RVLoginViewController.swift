@@ -28,11 +28,10 @@ class RVLoginViewController: RVBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         KeyboardAvoiding.avoidingView = loginView
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
         passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
-        /*
+        
         emailTextField.rx.textFieldDidBeginEditing.subscribe(onNext: { (alwaysTrue) in
             print("In textFieldDidBeginEditing)")
         }).disposed(by: rx_disposeBag)
@@ -54,9 +53,34 @@ class RVLoginViewController: RVBaseViewController {
                 return Observable<String>.just(text!)
             })
         emailInput  .subscribe(onNext: { (e: String) in
-         //   print("In \(self.classForCoder).emailInput.subscribe: \(e)")
+            print("In \(self.classForCoder).emailInput.subscribe: \(e)")
         }).disposed(by: rx_disposeBag)
- */
+        
+        
+        let emailInput2 = emailTextField.rx.text
+            .filter{(input: String?) -> Bool in
+                if let text = input {
+                   return (text.isValidEmail() == nil)
+                } else { return false }
+        }
+            .flatMapLatest { (text: String?) -> Observable<String> in
+            return Observable<String>.just(text!)
+        }
+        .shareReplay(1)
+        .observeOn(MainScheduler.instance)
+        emailInput2.subscribe(onNext: { (email: String) in
+            RVMeteorService.sharedInstance.rxFindAccountViaEmail(email: email)
+                .subscribe(onNext: { (email: String) in
+                print("email is: \(email)")
+            }, onError: { (error ) in
+                print(error)
+                }, onCompleted: {
+                    print("COmpleted")
+                }, onDisposed: {
+                    print("Disposed")
+                }).disposed(by: self.rx_disposeBag)
+        }).disposed(by: rx_disposeBag)
+ 
     }
 
 }
@@ -66,7 +90,8 @@ extension RVLoginViewController: UITextFieldDelegate {
     // These delegate methods can be used so that test fields that are hidden by the keyboard are shown when they are focused
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.emailTextField {
-            KeyboardAvoiding.avoidingView = self.loginView
+            KeyboardAvoiding.padding = 20
+            KeyboardAvoiding.avoidingView = textField
         }
 
         else if textField == self.passwordTextField {
@@ -78,15 +103,8 @@ extension RVLoginViewController: UITextFieldDelegate {
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if textField == self.emailTextField {
-            print("In \(self.classForCoder).making passwordField first responders")
-            self.passwordTextField.becomeFirstResponder()
-        }
-
-        else if textField == self.passwordTextField {
-            textField.resignFirstResponder()
-        }
+        if textField == self.emailTextField { self.passwordTextField.becomeFirstResponder() }
+        else if textField == self.passwordTextField { textField.resignFirstResponder() }
         return true
     }
     func loginFailure(hide: Bool) {

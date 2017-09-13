@@ -107,7 +107,9 @@ class RVSwiftDDP: Meteor {
             print("In RXSwiftDDP DDP_FAILED notification callback")
         }
     }
-
+    class func loginWithPassword(email: String, password: String, completionHandler:@escaping (Any?, RVError?)-> Void) -> Void {
+        
+    }
     private class func setupObserver() {
         loginStuff.subscribe(
             onNext: {print("onNext: \($0)")},

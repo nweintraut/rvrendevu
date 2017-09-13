@@ -15,4 +15,7 @@ enum RVMeteorMethod: String {
     case update = "update"
     case destroy = "destroy"
     case list = "list"
+    
+    
+    case findAccountMethod = "users.findAccountViaEmail"
 }

@@ -84,9 +84,58 @@ class RVMeteorService: NSObject {
             callback(result, error)
         }
     }
+    func findAccountViaEmail(email: String, callback:@escaping (String, RVError?) -> Void) -> String? {
+        return self.call(method: RVMeteorMethod.findAccountMethod, params: [["email": email] as AnyObject]) { (result, error) in
+            if let error = error {
+                callback("", error)
+            } else if let result = result as? String {
+                print("\(result)")
+                callback(result, nil)
+            } else {
+                print("In \(self.classForCoder), no error but no result")
+                callback("", nil)
+            }
+        }
+        
+    }
     
 }
+extension RVMeteorService {
 
+    func rxFindAccountViaEmail(email: String) -> Observable<String> {
+        return Observable.create({ (observer) -> Disposable in
+            if let message = email.isValidEmail() {
+                observer.onError(RVError(message: message))
+            } else {
+                let _ = self.findAccountViaEmail(email: email, callback: { (emailFound: String, error: RVError?) in
+                    if let error = error {
+                        observer.onError(error)
+                        return
+                    } else {
+                        observer.onNext(emailFound)
+                        observer.onCompleted()
+                    }
+                })
+            }
+            /*
+            let dummyPassword = "\(Date().timeIntervalSince1970)_dummyPassword"
+            Meteor.loginWithPassword(email, password: dummyPassword) { (result, error: DDPError?) in
+                if let error: RVError = RVError.convertDDPError(ddpError: error) {
+                    observer.onError(error)
+                    return
+                } else if let result = result {
+                    print("In \(self.classForCoder).rxEmailLookup, result is \(result)")
+                    observer.onNext("\(result)")
+                } else {
+                    observer.onNext("No result")
+                }
+                observer.onCompleted()
+            }
+            */
+            return Disposables.create()
+        })
+    }
+}
 extension Reactive where Base: RVMeteorService {
     func loginViaPassword(email: String, password: String) -> Observable<String> {
         return Observable.create({ observer -> Disposable in
