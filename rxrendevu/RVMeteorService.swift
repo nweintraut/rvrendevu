@@ -102,39 +102,7 @@ class RVMeteorService: NSObject {
 }
 extension RVMeteorService {
 
-    func rxFindAccountViaEmail(email: String) -> Observable<String> {
-        return Observable.create({ (observer) -> Disposable in
-            if let message = email.isValidEmail() {
-                observer.onError(RVError(message: message))
-            } else {
-                let _ = self.findAccountViaEmail(email: email, callback: { (emailFound: String, error: RVError?) in
-                    if let error = error {
-                        observer.onError(error)
-                        return
-                    } else {
-                        observer.onNext(emailFound)
-                        observer.onCompleted()
-                    }
-                })
-            }
-            /*
-            let dummyPassword = "\(Date().timeIntervalSince1970)_dummyPassword"
-            Meteor.loginWithPassword(email, password: dummyPassword) { (result, error: DDPError?) in
-                if let error: RVError = RVError.convertDDPError(ddpError: error) {
-                    observer.onError(error)
-                    return
-                } else if let result = result {
-                    print("In \(self.classForCoder).rxEmailLookup, result is \(result)")
-                    observer.onNext("\(result)")
-                } else {
-                    observer.onNext("No result")
-                }
-                observer.onCompleted()
-            }
-            */
-            return Disposables.create()
-        })
-    }
+
 }
 extension Reactive where Base: RVMeteorService {
     func loginViaPassword(email: String, password: String) -> Observable<String> {
@@ -153,6 +121,39 @@ extension Reactive where Base: RVMeteorService {
     }
     func loginViaToken() {
         
+    }
+    func findAccountViaEmail(email: String) -> Observable<String> {
+        return Observable.create({ (observer) -> Disposable in
+            if let message = email.isValidEmail() {
+                observer.onError(RVError(message: message))
+            } else {
+                let _ = self.base.findAccountViaEmail(email: email, callback: { (emailFound: String, error: RVError?) in
+                    if let error = error {
+                        observer.onError(error)
+                        return
+                    } else {
+                        observer.onNext(emailFound)
+                        observer.onCompleted()
+                    }
+                })
+            }
+            /*
+             let dummyPassword = "\(Date().timeIntervalSince1970)_dummyPassword"
+             Meteor.loginWithPassword(email, password: dummyPassword) { (result, error: DDPError?) in
+             if let error: RVError = RVError.convertDDPError(ddpError: error) {
+             observer.onError(error)
+             return
+             } else if let result = result {
+             print("In \(self.classForCoder).rxEmailLookup, result is \(result)")
+             observer.onNext("\(result)")
+             } else {
+             observer.onNext("No result")
+             }
+             observer.onCompleted()
+             }
+             */
+            return Disposables.create()
+        })
     }
     
 }

@@ -28,6 +28,7 @@ class RVLoginViewController: RVBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideView(view: self.emailMessageLabel)
         KeyboardAvoiding.avoidingView = loginView
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
         passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
@@ -56,32 +57,44 @@ class RVLoginViewController: RVBaseViewController {
             print("In \(self.classForCoder).emailInput.subscribe: \(e)")
         }).disposed(by: rx_disposeBag)
         
-        
-        let emailInput2 = emailTextField.rx.text
-            .filter{(input: String?) -> Bool in
-                if let text = input {
-                   return (text.isValidEmail() == nil)
-                } else { return false }
-        }
-            .flatMapLatest { (text: String?) -> Observable<String> in
-            return Observable<String>.just(text!)
+        let emailLookup = emailTextField.rx.text
+            .filter {(input: String?) -> Bool in
+                self.hideView(view: self.passwordView)
+                if let candidate = input {
+                    if let message = candidate.isValidEmail() {
+                        self.showView(view: self.emailMessageLabel)
+                        self.emailMessageLabel.text = message
+                        return false
+                    } else {
+                        self.hideView(view: self.emailMessageLabel)
+                        self.showView(view: self.passwordView)
+                        return true
+                    }
+                }
+                else { return false }
+            }
+            .map { (input: String?) -> String in return (input != nil) ? input! : "" }
+            .throttle(3.0, scheduler: MainScheduler.instance)
+            .flatMap { (email) -> Observable<String> in
+            return RVMeteorService.sharedInstance.rx.findAccountViaEmail(email: email.lowercased())
+                .catchErrorJustReturn("")
         }
         .shareReplay(1)
         .observeOn(MainScheduler.instance)
-        emailInput2.subscribe(onNext: { (email: String) in
-            RVMeteorService.sharedInstance.rxFindAccountViaEmail(email: email)
-                .subscribe(onNext: { (email: String) in
-                print("email is: \(email)")
-            }, onError: { (error ) in
-                print(error)
-                }, onCompleted: {
-                    print("COmpleted")
-                }, onDisposed: {
-                    print("Disposed")
-                }).disposed(by: self.rx_disposeBag)
+        emailLookup.subscribe(onNext: { (email) in
+            print("In emailLookup with: \(email)")
+            if email != "" {
+               
+            } else {
+                
+            }
+        }, onError: { (error) in
+            print(error)
+        }, onCompleted: {
+            print("In emailLookup on Completed")
         }).disposed(by: rx_disposeBag)
- 
     }
+    
 
 }
 

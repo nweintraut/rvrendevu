@@ -16,10 +16,10 @@ extension String {
             let regex = try NSRegularExpression(pattern: emailRegEx, options: NSRegularExpression.Options.caseInsensitive)
             
             let match = regex.matches(in: email, options: NSRegularExpression.MatchingOptions.anchored, range: NSRange(location: 0, length: email.characters.count ) )
-            if match.count == 0 { return "Did not match an email" }
+            if match.count == 0 { return "Not a valid email address :-(" }
             return nil
         } catch let error {
-            return "In String Extension.validateEmail, go exception creating Regex \(error.localizedDescription)"
+            return "In String Extension.validateEmail, got exception creating Regex \(error.localizedDescription)"
         }
     }
     func isValidPassword() -> String? {
