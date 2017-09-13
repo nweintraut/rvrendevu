@@ -23,13 +23,16 @@ class RVLoginViewController: RVBaseViewController {
     @IBOutlet weak var passwordMessageLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    let passwordTextEvaluator = RVPasswordTextEvalutor()
+    let emailTextEvaluator = RVEmailTextEvaluator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         KeyboardAvoiding.avoidingView = loginView
-        passwordTextField.delegate = self
-        //emailTextField.delegate = self
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
+        passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
+        /*
         emailTextField.rx.textFieldDidBeginEditing.subscribe(onNext: { (alwaysTrue) in
             print("In textFieldDidBeginEditing)")
         }).disposed(by: rx_disposeBag)
@@ -42,6 +45,18 @@ class RVLoginViewController: RVBaseViewController {
             print("In textFieldDidEndEditingWithReason: \(reason.rawValue))")
         }).disposed(by: rx_disposeBag)
         
+        let emailInput = emailTextField.rx.text
+            .filter { (input: String?) -> Bool in
+          //      print("In \(self.classForCoder)emailTextField.rx.text: \(String(describing: input))")
+                return (input ?? "").characters.count > 0
+            }
+            .flatMap({ (text: String?) -> Observable<String> in
+                return Observable<String>.just(text!)
+            })
+        emailInput  .subscribe(onNext: { (e: String) in
+         //   print("In \(self.classForCoder).emailInput.subscribe: \(e)")
+        }).disposed(by: rx_disposeBag)
+ */
     }
 
 }
@@ -56,7 +71,7 @@ extension RVLoginViewController: UITextFieldDelegate {
 
         else if textField == self.passwordTextField {
             KeyboardAvoiding.padding = 20
-            KeyboardAvoiding.avoidingView = textField
+            KeyboardAvoiding.avoidingView = self.loginView
             KeyboardAvoiding.padding = 0
         }
         return true
@@ -86,53 +101,16 @@ extension RVLoginViewController: UITextFieldDelegate {
     func hideButtons() {
     
     }
-    func hideView(view: UIView?) {
-        if let view = view { view.isHidden = true }
-    }
-    func showView(view: UIView?) {
-        if let view = view { view.isHidden = false }
-    }
+
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("In \(self.classForCoder).shouldChange, textFieldText: \(textField.text!) and newString is:\(string) \(string.characters.count)")
-        self.loginFailure(hide: true)
-        let emailField = (self.emailTextField != nil) && ( textField == self.emailTextField)
-        let passwordField = (self.passwordTextField != nil) && (textField == self.passwordTextField)
-        let text = textField.text ?? ""
-        let count = text.characters.count
-        let combined = "\(text)\(string)"
-        if string == "" {
-            // nothing new
-            if count <= 1 {
-                if emailField {
-                    showHideEmailMessage(message: "Invalid Email", show: true)
-                    hideButtons()
-                    return true
-                } else if passwordField {
-                    showHidePasswordMessage(message: "Invalid Password", show: true)
-                    hideButtons()
-                } else {
-                    return false
-                }
-            } else {
-                let candidate = text.substring(to: count - 1)
-                if emailField {
-                    if let message = candidate.isValidEmail() {
-                        showHideEmailMessage(message: message, show: true)
-                        hideView(view: passwordView)
-                        hideButtons()
-                    } else {
-                        
-                    }
-                }
-            }
-        } else {
-            
+        if (self.emailTextField != nil) && (self.emailTextField == textField) {
+            return emailTextEvaluator.evaluate(text: textField.text, replacementRange: range, replacementString: string)
+        } else if (self.passwordTextField != nil) && (self.passwordTextField == textField) {
+            return passwordTextEvaluator.evaluate(text: textField.text, replacementRange: range, replacementString: string)
         }
-        return true
+        return false
     }
- 
-    
 }
 
 

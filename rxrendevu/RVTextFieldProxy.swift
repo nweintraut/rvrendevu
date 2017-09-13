@@ -18,11 +18,16 @@ class RVTextFieldProxy: DelegateProxy {
 extension RVTextFieldProxy: DelegateProxyType {
     class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
         if let textField = object as? UITextField {
+            textField.delegate = delegate as? UITextFieldDelegate
+            /*
             if let delegate = delegate as? UITextFieldDelegate {
+                print("In \(self.classForCoder()).setCurrentDelegate have delegate \(delegate)")
                 textField.delegate = delegate
             } else {
-                print("In \(self.classForCoder()).setCurrent Delegate, delegate \(delegate ?? "no-delegate" as AnyObject) is not a UITextFieldDelegate")
+                print("In \(self.classForCoder()).setCurrentDelegate, textField: \(textField), delegate \(delegate ?? "no-delegate" as AnyObject) is not a UITextFieldDelegate")
+                print(delegate)
             }
+ */
         } else {
             print("In \(self.classForCoder()).setCurrent Delegate, Object \(object) is nota UITextField")
         }
