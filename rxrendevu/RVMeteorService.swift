@@ -67,7 +67,9 @@ class RVMeteorService: NSObject {
         } else if password.isValidPassword() != nil {
             callback(nil, RVError(message: "In \(self.classForCoder).loginWithPassword invalid password: \n\(password.isValidEmail()!)"))
         } else {
+            print("---------- In \(self.classForCoder).loginWithPassword email: \(email), password: \(password)")
             Meteor.loginWithPassword(email.lowercased(), password: password) { (result, error: DDPError?) in
+                
                 let error = RVError.convertDDPError(ddpError: error)
                 callback(result, error)
             }

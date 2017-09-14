@@ -14,7 +14,7 @@ import NSObject_Rx
 import Action
 
 class RVLoginViewController: RVBaseViewController {
-    
+    var viewModel = RVLoginViewModel()
     @IBOutlet weak var goofyView: UIView!
 //    @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
@@ -118,7 +118,29 @@ class RVLoginViewController: RVBaseViewController {
             print(error)
         }).disposed(by: rx_disposeBag)
         
-
+        
+        let loginPasswordObservable = Observable.combineLatest(emailTextField.rx.text.orEmpty, passwordTextField.rx.text.orEmpty) { (email, password) -> (String, String) in
+            return (email, password)
+        }
+        let loginAction = viewModel.loginAction
+        textButton.rx.tap.withLatestFrom(loginPasswordObservable)
+        .subscribe(loginAction.inputs).disposed(by: rx_disposeBag)
+        loginAction.elements.subscribe(onNext: { (result) in
+            print("In elements have result \(result)")
+        }, onError: { (error ) in
+            if let error = error as? RVError {
+                print(error.toString())
+            }
+        }).disposed(by: rx_disposeBag)
+        /*
+        viewModel.loginAction.elements.subscribe(onNext: { (result) in
+            print("In\(self.classForCoder) action result \(result)")
+        }, onError: { (error) in
+            if let error = error as? RVError {
+                print(error.toString())
+            }
+        }).disposed(by: rx_disposeBag)
+*/
         loginButton.rx.tap.subscribe(onNext: {_ in
             if let email = self.emailTextField.text {
                 if let password = self.passwordTextField.text {
@@ -136,6 +158,7 @@ class RVLoginViewController: RVBaseViewController {
                 }
             }
         }).disposed(by: rx_disposeBag)
+ 
         registerButton.rx.tap.subscribe(onNext: {_ in
             print("In \(self.classForCoder).registerButton")
             if let email = self.emailTextField.text {
