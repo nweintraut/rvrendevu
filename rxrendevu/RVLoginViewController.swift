@@ -16,7 +16,6 @@ import Action
 class RVLoginViewController: RVBaseViewController {
     var viewModel = RVLoginViewModel()
     @IBOutlet weak var goofyView: UIView!
-//    @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var textButton: UIButton!
@@ -27,12 +26,10 @@ class RVLoginViewController: RVBaseViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
- //   @IBOutlet weak var passwordView: UIView!
- //   @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var passwordMessageLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    let passwordTextEvaluator = RVPasswordTextEvalutor()
-    let emailTextEvaluator = RVEmailTextEvaluator()
+    let passwordTextEvaluator   = RVPasswordTextEvalutor()
+    let emailTextEvaluator      = RVEmailTextEvaluator()
 
     @IBOutlet weak var loginRegisterErrorView: UIView!
     @IBOutlet weak var loginRegisterErrorLabel: UILabel!
@@ -43,24 +40,26 @@ class RVLoginViewController: RVBaseViewController {
         self.goofyView.layer.borderWidth = 5.0
         self.goofyView.layer.borderColor = UIColor.facebookBlue().cgColor
         self.hideView(view: self.emailMessageLabel)
-        self.hideView(view: self.passwordMessageLabel)
+        self.showHidePasswordStuff(hide: true)
         self.hideLoginRegisterButtonViews()
         KeyboardAvoiding.avoidingView = goofyView
         KeyboardAvoiding.padding = 20
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
         passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
     
-        let emailLookup = emailTextField.rx.text
+        let emailLookup = emailTextField.rx.text.orEmpty
             .filter {(input: String?) -> Bool in
                 if let candidate = input {
                     if let message = candidate.isValidEmail() {
-                        self.showView(view: self.emailMessageLabel)
+                        if self.emailTextField.isEditing {
+                            self.showView(view: self.emailMessageLabel)
+                            self.emailMessageLabel.text = message
+                        }
                         self.showHidePasswordStuff(hide: true)
-                        self.emailMessageLabel.text = message
                         return false
                     } else {
                         self.hideView(view: self.emailMessageLabel)
-                        self.showHidePasswordStuff(hide: false)
+                        self.showView(view: self.passwordTextField)
                         return true
                     }
                 }
@@ -109,8 +108,10 @@ class RVLoginViewController: RVBaseViewController {
             .observeOn(MainScheduler.instance)
         passwordLookup.subscribe(onNext: { (password) in
             if let message = password.isValidPassword() {
-                self.showView(view: self.passwordMessageLabel)
-                self.passwordMessageLabel.text = message
+                if self.passwordTextField.isEditing{
+                    self.showView(view: self.passwordMessageLabel)
+                    self.passwordMessageLabel.text = message
+                }
             } else {
                 self.hideView(view: self.passwordMessageLabel)
             }
@@ -210,11 +211,7 @@ class RVLoginViewController: RVBaseViewController {
         self.hideView(view: self.loginButtonView)
         self.hideView(view: self.registerButtonView)
     }
-    func emailOrPassword(textField: UITextField) -> String {
 
-        if (textField == self.emailTextField) { return "Email" }
-        return "Password"
-    }
     func showHidePasswordStuff(hide: Bool) {
         self.showHideView(view: self.passwordTextField, hide: hide)
         if hide {self.showHideView(view: self.passwordMessageLabel, hide: hide) }
@@ -223,9 +220,7 @@ class RVLoginViewController: RVBaseViewController {
 }
 
 extension RVLoginViewController: UITextFieldDelegate {
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == self.emailTextField { self.passwordTextField.becomeFirstResponder() }
