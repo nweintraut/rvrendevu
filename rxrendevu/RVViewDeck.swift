@@ -18,7 +18,7 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
     static let sharedInstance: RVViewDeck = { return RVViewDeck()} ()
     internal        var childControllerProfile: RVControllerProfile?    = nil
     internal weak   var childController:        UIViewController?       = nil
-    var deckController: IIViewDeckController = IIViewDeckController()
+    var deckController: RVViewDeckController = RVViewDeckController()
     
     let router = RVRouter()
     var newRouteInProcess: Bool = false
@@ -43,6 +43,7 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
         window.rootViewController = generateControllerStack()
 
     }
+
     func openSide(side: IIViewDeckSide, animated: Bool = true) { self.deckController.open(side, animated: animated) }
     func closeSide(animated: Bool = true) { self.deckController.closeSide(animated) }
     func toggleSide(side: RVViewDeckSide, animated: Bool = true) {
@@ -60,6 +61,14 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
         } else {
             self.closeSide()
         }
+    }
+    func instantiateNakedViewDeck() -> RVViewDeckController {
+        if let leftController = RVControllerFactory.sharedInstance.getController(key: .menu) {
+            self.leftViewController = leftController
+        } else {
+            print("In \(self.instanceType).generateControllerStack, failed to get LeftController")
+        }
+        return self.deckController
     }
     private func generateControllerStack() -> IIViewDeckController {
         var leftController = UIViewController()
@@ -84,7 +93,7 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
             print("In \(self.classForCoder).generateControllerStack, could not find profile for \(key.rawValue)")
            
         }
-        let deckController = IIViewDeckController(center: centerController, leftViewController: leftController)
+        let deckController = RVViewDeckController(center: centerController, leftViewController: leftController)
         deckController.preferredContentSize = CGSize(width: 200, height: centerController.view.bounds.height)
         self.deckController = deckController
         deckController.delegate = self

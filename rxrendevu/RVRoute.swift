@@ -8,6 +8,7 @@
 
 import Foundation
 class RVRoute {
+    var priorRoute: RVRoute? = nil
     var routePaths = [RVRoutePath]()
     func appendPath(path: RVRoutePath) -> RVRoute {
         self.routePaths.append(path)
