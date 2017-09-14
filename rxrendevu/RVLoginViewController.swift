@@ -43,18 +43,11 @@ class RVLoginViewController: RVBaseViewController {
         KeyboardAvoiding.padding = 20
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
         passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
-
-
-
-
     
         let emailLookup = emailTextField.rx.text
             .filter {(input: String?) -> Bool in
-
                 if let candidate = input {
-                //    self.enableButtons(enable: false)
                     if let message = candidate.isValidEmail() {
-                        //self.hideLoginRegisterButtonViews()
                         self.showView(view: self.emailMessageLabel)
                         self.showHidePasswordStuff(hide: true)
                         self.emailMessageLabel.text = message
@@ -76,10 +69,12 @@ class RVLoginViewController: RVBaseViewController {
         }
         .shareReplay(1)
         .observeOn(MainScheduler.instance)
+        /*
         emailLookup.subscribe(onNext: { (email) in
         }, onError: { (error) in
             print(error)
         }).disposed(by: rx_disposeBag)
+ */
         
         Observable.combineLatest(emailTextField.rx.text, passwordTextField.rx.text, emailLookup) { (email, password, lookup) -> String in
             guard let email = email, let password = password else {
