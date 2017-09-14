@@ -89,10 +89,8 @@ class RVMeteorService: NSObject {
             if let error = error {
                 callback("", error)
             } else if let result = result as? String {
-                print("\(result)")
                 callback(result, nil)
             } else {
-                print("In \(self.classForCoder), no error but no result")
                 callback("", nil)
             }
         }
@@ -137,21 +135,6 @@ extension Reactive where Base: RVMeteorService {
                     }
                 })
             }
-            /*
-             let dummyPassword = "\(Date().timeIntervalSince1970)_dummyPassword"
-             Meteor.loginWithPassword(email, password: dummyPassword) { (result, error: DDPError?) in
-             if let error: RVError = RVError.convertDDPError(ddpError: error) {
-             observer.onError(error)
-             return
-             } else if let result = result {
-             print("In \(self.classForCoder).rxEmailLookup, result is \(result)")
-             observer.onNext("\(result)")
-             } else {
-             observer.onNext("No result")
-             }
-             observer.onCompleted()
-             }
-             */
             return Disposables.create()
         })
     }
