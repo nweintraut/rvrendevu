@@ -61,6 +61,18 @@ class RVMeteorService: NSObject {
             }
         }
     }
+    func loginWithPassword(email: String, password: String, callback: @escaping (Any?, RVError?) -> Void) {
+        if email.isValidEmail() != nil {
+            callback(nil, RVError(message: "In \(self.classForCoder).loginWithPassword invalid email: \n\(email.isValidEmail()!)"))
+        } else if password.isValidPassword() != nil {
+            callback(nil, RVError(message: "In \(self.classForCoder).loginWithPassword invalid password: \n\(password.isValidEmail()!)"))
+        } else {
+            Meteor.loginWithPassword(email.lowercased(), password: password) { (result, error: DDPError?) in
+                let error = RVError.convertDDPError(ddpError: error)
+                callback(result, error)
+            }
+        }
+    }
     fileprivate func loginViaToken(callback: @escaping (RVError?) -> Void) {
         let haveToken = Meteor.client.loginWithToken( { (result, error: DDPError?) in
             let error = RVError.convertDDPError(ddpError: error)
@@ -96,6 +108,17 @@ class RVMeteorService: NSObject {
         }
         
     }
+    func register(email: String, password: String, callback:@escaping(Any?, RVError?) -> Void ) {
+        if email.isValidEmail() != nil {
+            callback(nil, RVError(message: "In \(self.classForCoder).loginWithPassword invalid email: \n\(email.isValidEmail()!)"))
+        } else if password.isValidPassword() != nil {
+            callback(nil, RVError(message: "In \(self.classForCoder).loginWithPassword invalid password: \n\(password.isValidEmail()!)"))
+        } else {
+            Meteor.signupWithEmail(email.lowercased(), password: password, callback: { (result, error) in
+                callback(result, RVError.convertDDPError(ddpError: error))
+            })
+        }
+    }
     
 }
 extension RVMeteorService {
@@ -103,21 +126,31 @@ extension RVMeteorService {
 
 }
 extension Reactive where Base: RVMeteorService {
-    func loginViaPassword(email: String, password: String) -> Observable<String> {
+    func loginViaPassword(email: String, password: String) -> Observable<Any?> {
         return Observable.create({ observer -> Disposable in
-            self.base.loginWithPassword(email: email, password: password, callback: { ( error) in
+            self.base.loginWithPassword(email: email, password: password, callback: { (result, error: RVError?) in
                 if let error = error {
                     observer.onError(error)
-                    return
                 } else {
-                    observer.on(.next(""))
+                    observer.onNext(result)
                     observer.onCompleted()
                 }
             })
             return Disposables.create()
         })
     }
-    func loginViaToken() {
+    func register(email: String, password: String) -> Observable<Any?> {
+        return Observable.create({ (observer) -> Disposable in
+            self.base.register(email: email, password: password, callback: { (result, error) in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(result)
+                    observer.onCompleted()
+                }
+            })
+            return Disposables.create()
+        })
         
     }
     func findAccountViaEmail(email: String) -> Observable<String> {
@@ -138,5 +171,4 @@ extension Reactive where Base: RVMeteorService {
             return Disposables.create()
         })
     }
-    
 }

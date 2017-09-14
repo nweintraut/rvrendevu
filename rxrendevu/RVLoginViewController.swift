@@ -32,6 +32,8 @@ class RVLoginViewController: RVBaseViewController {
     let passwordTextEvaluator = RVPasswordTextEvalutor()
     let emailTextEvaluator = RVEmailTextEvaluator()
 
+    @IBOutlet weak var loginRegisterErrorView: UIView!
+    @IBOutlet weak var loginRegisterErrorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.goofyView.layer.borderWidth = 5.0
@@ -69,23 +71,15 @@ class RVLoginViewController: RVBaseViewController {
         }
         .shareReplay(1)
         .observeOn(MainScheduler.instance)
-        /*
-        emailLookup.subscribe(onNext: { (email) in
-        }, onError: { (error) in
-            print(error)
-        }).disposed(by: rx_disposeBag)
- */
+
         
         Observable.combineLatest(emailTextField.rx.text, passwordTextField.rx.text, emailLookup) { (email, password, lookup) -> String in
             guard let email = email, let password = password else {
                 return "hide"
             }
             if (email.isValidEmail() == nil) && (password.isValidPassword() == nil) {
-                if lookup == "" {
-                    return "Register"
-                } else {
-                    return "Login"
-                }
+                if lookup == "" { return "Register" }
+                else { return "Login" }
             } else { return "hide" }
             }.subscribe(onNext: { (loginRegisterState) in
                 if loginRegisterState == "Register" {
@@ -120,7 +114,58 @@ class RVLoginViewController: RVBaseViewController {
             print(error)
         }).disposed(by: rx_disposeBag)
         
-        
+        loginButton.rx.tap.subscribe(onNext: {_ in
+            print("In \(self.classForCoder).loginButton")
+            if let email = self.emailTextField.text {
+                if let password = self.passwordTextField.text {
+                     RVMeteorService.sharedInstance.rx.loginViaPassword(email: email, password: password)
+                    .subscribe(onNext: { (result) in
+                        if let view = self.loginRegisterErrorView { view.isHidden = true }
+                        self.emailTextField.text = ""
+                        self.passwordTextField.text = ""
+                        print("Do Login Switch")
+                    }, onError: { (error) in
+                        if let error = error as? RVError {
+                            self.showLoginRegisterError(message: "\(error.toString)")
+                        }
+                    }).disposed(by: self.rx_disposeBag)
+                }
+            }
+        }).disposed(by: rx_disposeBag)
+        registerButton.rx.tap.subscribe(onNext: {_ in
+            print("In \(self.classForCoder).registerButton")
+            if let email = self.emailTextField.text {
+                if let password = self.passwordTextField.text {
+                    RVMeteorService.sharedInstance.rx.register(email: email, password: password)
+                        .subscribe(onNext: { (result) in
+                            if let view = self.loginRegisterErrorView { view.isHidden = true }
+                            print("Finished Register")
+                            self.emailTextField.text = ""
+                            self.passwordTextField.text = ""
+                            RVMeteorService.sharedInstance.rx.loginViaPassword(email: email, password: password)
+                                .subscribe(onNext: { (result: Any?) in
+                                
+                            }, onError: { (error ) in
+                                if let error = error as? RVError {
+                                    print(error.toString())
+                                }
+                            } ).disposed(by: self.rx_disposeBag)
+                        }, onError: { (error) in
+                            if let error = error as? RVError {
+                                self.showLoginRegisterError(message: "\(error.toString)")
+                            }
+                        }).disposed(by: self.rx_disposeBag)
+                }
+            }
+        }).disposed(by: rx_disposeBag)
+    }
+    func showLoginRegisterError(message: String) {
+        if let view = self.loginRegisterErrorView {
+            if let label = self.loginRegisterErrorLabel {
+                view.isHidden = false
+                label.text = message
+            }
+        }
     }
     func enableButtons(enable: Bool) {
         if let login = self.loginButton { login.isEnabled = enable }

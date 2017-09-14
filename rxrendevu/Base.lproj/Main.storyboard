@@ -215,6 +215,22 @@
                                     <constraint firstItem="d47-VT-wjm" firstAttribute="top" secondItem="kBn-R2-dqk" secondAttribute="bottom" constant="8" id="zWs-To-HIa"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xj0-O6-gM5" userLabel="LoginRegisterErrorView">
+                                <rect key="frame" x="7" y="100" width="306" height="76"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H4-Jy-S9U">
+                                        <rect key="frame" x="8" y="27" width="290" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.67849909292787591" blue="0.70886555096492132" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="3H4-Jy-S9U" firstAttribute="centerX" secondItem="xj0-O6-gM5" secondAttribute="centerX" id="RIw-eu-tgc"/>
+                                    <constraint firstItem="3H4-Jy-S9U" firstAttribute="centerY" secondItem="xj0-O6-gM5" secondAttribute="centerY" id="e1t-ff-AH6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.34957892039999999" blue="0.26400056659999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -231,6 +247,8 @@
                         <outlet property="goofyView" destination="PX4-Uc-wbw" id="7y6-ZK-nmy"/>
                         <outlet property="loginButton" destination="V66-QC-dcq" id="mJb-Zi-izF"/>
                         <outlet property="loginButtonView" destination="J1p-Wa-XCP" id="U8u-xa-Rqi"/>
+                        <outlet property="loginRegisterErrorLabel" destination="3H4-Jy-S9U" id="8qR-4U-7Ha"/>
+                        <outlet property="loginRegisterErrorView" destination="xj0-O6-gM5" id="Qhr-T0-Rhc"/>
                         <outlet property="passwordMessageLabel" destination="kBn-R2-dqk" id="EzT-z5-zxM"/>
                         <outlet property="passwordTextField" destination="d47-VT-wjm" id="Btr-yU-TFf"/>
                         <outlet property="registerButton" destination="qcD-AZ-6TB" id="mSy-Vc-eeM"/>
