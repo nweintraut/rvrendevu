@@ -32,6 +32,12 @@
 		286C42AB1F5B95BB008C01C3 /* RVBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42AA1F5B95BB008C01C3 /* RVBaseViewController.swift */; };
 		286C42AE1F5B9CA3008C01C3 /* RVBaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42AD1F5B9CA3008C01C3 /* RVBaseNavController.swift */; };
 		286C42B01F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C42AF1F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift */; };
+		286DA4241F6AE70600E8AF74 /* RVBindableNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4231F6AE70600E8AF74 /* RVBindableNavigationType.swift */; };
+		286DA4261F6AE88500E8AF74 /* RVSceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4251F6AE88500E8AF74 /* RVSceneTransitionType.swift */; };
+		286DA4281F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4271F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift */; };
+		286DA42A1F6AE98800E8AF74 /* RVScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4291F6AE98800E8AF74 /* RVScene.swift */; };
+		286DA42C1F6AF68C00E8AF74 /* RVNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */; };
+		286DA42E1F6AF85500E8AF74 /* RVSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */; };
 		286EFE0E1F5D0CE800FAB2DC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE0D1F5D0CE800FAB2DC /* UIViewController+Extensions.swift */; };
 		286EFE101F5D0DAA00FAB2DC /* RVAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE0F1F5D0DAA00FAB2DC /* RVAsyncOperation.swift */; };
 		286EFE121F5D0FFC00FAB2DC /* RVOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE111F5D0FFC00FAB2DC /* RVOperationQueue.swift */; };
@@ -100,6 +106,12 @@
 		286C42AA1F5B95BB008C01C3 /* RVBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBaseViewController.swift; sourceTree = "<group>"; };
 		286C42AD1F5B9CA3008C01C3 /* RVBaseNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBaseNavController.swift; sourceTree = "<group>"; };
 		286C42AF1F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBaseTabBarViewController.swift; sourceTree = "<group>"; };
+		286DA4231F6AE70600E8AF74 /* RVBindableNavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBindableNavigationType.swift; sourceTree = "<group>"; };
+		286DA4251F6AE88500E8AF74 /* RVSceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSceneTransitionType.swift; sourceTree = "<group>"; };
+		286DA4271F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSceneCoordinatorType.swift; sourceTree = "<group>"; };
+		286DA4291F6AE98800E8AF74 /* RVScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVScene.swift; sourceTree = "<group>"; };
+		286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVNavigationType.swift; sourceTree = "<group>"; };
+		286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSceneCoordinator.swift; sourceTree = "<group>"; };
 		286EFE0D1F5D0CE800FAB2DC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		286EFE0F1F5D0DAA00FAB2DC /* RVAsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVAsyncOperation.swift; sourceTree = "<group>"; };
 		286EFE111F5D0FFC00FAB2DC /* RVOperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVOperationQueue.swift; sourceTree = "<group>"; };
@@ -250,6 +262,19 @@
 			name = BaseClasses;
 			sourceTree = "<group>";
 		};
+		286DA4221F6AE6F000E8AF74 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				286DA4231F6AE70600E8AF74 /* RVBindableNavigationType.swift */,
+				286DA4251F6AE88500E8AF74 /* RVSceneTransitionType.swift */,
+				286DA4271F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift */,
+				286DA4291F6AE98800E8AF74 /* RVScene.swift */,
+				286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */,
+				286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		286EFE171F5D204300FAB2DC /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +311,7 @@
 		28971B611F59F5A500EB19FD /* rxrendevu */ = {
 			isa = PBXGroup;
 			children = (
+				286DA4221F6AE6F000E8AF74 /* Navigation */,
 				286EFE171F5D204300FAB2DC /* LoginScene */,
 				28BF4F2C1F5C676C00E3FF1D /* Router */,
 				28FCEADF1F5BBD4300B0FA7A /* MenuScene */,
@@ -649,7 +675,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				286C42871F59FC6C008C01C3 /* RVProvider.swift in Sources */,
+				286DA4261F6AE88500E8AF74 /* RVSceneTransitionType.swift in Sources */,
 				28FCEADE1F5BBAA000B0FA7A /* RVMainViewController.swift in Sources */,
+				286DA42C1F6AF68C00E8AF74 /* RVNavigationType.swift in Sources */,
 				286C428D1F5A10D3008C01C3 /* RVMeteorCredentials.swift in Sources */,
 				286C42891F59FDDF008C01C3 /* RVError.swift in Sources */,
 				286C42A71F5B8DAC008C01C3 /* RVControllerProfile.swift in Sources */,
@@ -659,6 +687,7 @@
 				286C42A11F5B8C79008C01C3 /* RVNSObject.swift in Sources */,
 				28BF4F301F5C678E00E3FF1D /* RVRoutePath.swift in Sources */,
 				286C429F1F5B8C1C008C01C3 /* RVViewDeck.swift in Sources */,
+				286DA4241F6AE70600E8AF74 /* RVBindableNavigationType.swift in Sources */,
 				286C42A31F5B8D0D008C01C3 /* UIColor+Extension.swift in Sources */,
 				286C42911F5A71C3008C01C3 /* RVMeteorService.swift in Sources */,
 				286EFE121F5D0FFC00FAB2DC /* RVOperationQueue.swift in Sources */,
@@ -667,6 +696,7 @@
 				286C429A1F5B77E7008C01C3 /* RVMeteorMethods.swift in Sources */,
 				286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */,
 				28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */,
+				286DA4281F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift in Sources */,
 				286C42A51F5B8D66008C01C3 /* RVControllerFactory.swift in Sources */,
 				286EFE161F5D162400FAB2DC /* RVViewDeckRouteOperation.swift in Sources */,
 				28BF4F321F5C681700E3FF1D /* RVRouter.swift in Sources */,
@@ -674,6 +704,7 @@
 				286EFE191F5D205300FAB2DC /* RVLoginViewController.swift in Sources */,
 				286EFE101F5D0DAA00FAB2DC /* RVAsyncOperation.swift in Sources */,
 				28FCEAE11F5BBD5200B0FA7A /* RVMenuViewController.swift in Sources */,
+				286DA42A1F6AE98800E8AF74 /* RVScene.swift in Sources */,
 				286C42931F5A7FE0008C01C3 /* String+Extension.swift in Sources */,
 				286C428F1F5A11FE008C01C3 /* RVEJSON.swift in Sources */,
 				286C42961F5B7651008C01C3 /* RVBaseModel.swift in Sources */,
@@ -682,6 +713,7 @@
 				2822CAAB1F6AE1FB00029733 /* RVBaseViewModel.swift in Sources */,
 				286C42B01F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift in Sources */,
 				286EFE0E1F5D0CE800FAB2DC /* UIViewController+Extensions.swift in Sources */,
+				286DA42E1F6AF85500E8AF74 /* RVSceneCoordinator.swift in Sources */,
 				286C42AE1F5B9CA3008C01C3 /* RVBaseNavController.swift in Sources */,
 				281649801F69B32B0053F954 /* RVUserProfile+RxExtension.swift in Sources */,
 				286EFE141F5D120500FAB2DC /* RVAsyncRouteOperation.swift in Sources */,

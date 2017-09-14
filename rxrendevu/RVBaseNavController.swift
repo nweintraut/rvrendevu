@@ -7,8 +7,9 @@
 //
 
 import UIKit
-class RVBaseNavController: UINavigationController {
+class RVBaseNavController: UINavigationController, RVNavigationType {
     private var profile: RVControllerProfile? = nil
+    var navigationPath: RVRoutePath!
     func installConfig(profile: RVControllerProfile) {
         self.profile = profile
     }

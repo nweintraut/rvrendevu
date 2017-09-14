@@ -14,25 +14,23 @@ import NSObject_Rx
 import Action
 
 class RVLoginViewController: RVBaseViewController {
-    var viewModel = RVLoginViewModel()
+
     @IBOutlet weak var goofyView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var textButton: UIButton!
-
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var loginButtonView: UIView!
     @IBOutlet weak var registerButtonView: UIView!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-    
     @IBOutlet weak var passwordMessageLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    let passwordTextEvaluator   = RVPasswordTextEvalutor()
-    let emailTextEvaluator      = RVEmailTextEvaluator()
-
     @IBOutlet weak var loginRegisterErrorView: UIView!
     @IBOutlet weak var loginRegisterErrorLabel: UILabel!
+    var viewModel = RVLoginViewModel()
+    let passwordTextEvaluator   = RVPasswordTextEvalutor()
+    let emailTextEvaluator      = RVEmailTextEvaluator()
     
 
     override func viewDidLoad() {
