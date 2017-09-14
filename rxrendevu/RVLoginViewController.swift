@@ -15,18 +15,19 @@ import NSObject_Rx
 class RVLoginViewController: RVBaseViewController {
     
     @IBOutlet weak var goofyView: UIView!
-    @IBOutlet weak var loginView: UIView!
+//    @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
 
     @IBOutlet weak var loginButtonView: UIView!
     @IBOutlet weak var registerButtonView: UIView!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var passwordMessageLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
     let passwordTextEvaluator = RVPasswordTextEvalutor()
     let emailTextEvaluator = RVEmailTextEvaluator()
 
@@ -38,7 +39,7 @@ class RVLoginViewController: RVBaseViewController {
         self.hideView(view: self.passwordView)
         self.hideView(view: self.passwordMessageLabel)
         self.hideLoginRegisterButtonViews()
-        KeyboardAvoiding.avoidingView = loginView
+        KeyboardAvoiding.avoidingView = goofyView
         emailTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
      //   passwordTextField.delegate = self
         passwordTextField.rx.setDelegate(self).disposed(by: rx_disposeBag)
@@ -58,24 +59,23 @@ class RVLoginViewController: RVBaseViewController {
         passwordTextField.rx.textFieldDidEndEditing.subscribe(onNext: { (alwaysTrue) in
             print("In password rx.textFieldDidEndEditing)")
         }).disposed(by: rx_disposeBag)
-        /*
-        emailTextField.rx.textFieldDidEndEditingWithReason.subscribe(onNext: { (reason) in
-            print("In textFieldDidEndEditingWithReason: \(reason.rawValue))")
-        }).disposed(by: rx_disposeBag)
-        */
+
 
         
         let emailLookup = emailTextField.rx.text
             .filter {(input: String?) -> Bool in
-                self.hideView(view: self.passwordView)
+
                 if let candidate = input {
+                    self.enableButtons(enable: false)
                     if let message = candidate.isValidEmail() {
-                        self.hideLoginRegisterButtonViews()
+                        //self.hideLoginRegisterButtonViews()
                         self.showView(view: self.emailMessageLabel)
+                        self.showHidePasswordStuff(hide: true)
                         self.emailMessageLabel.text = message
                         return false
                     } else {
                         self.hideView(view: self.emailMessageLabel)
+                        self.showHidePasswordStuff(hide: false)
                         self.showView(view: self.passwordView)
                         return true
                     }
@@ -84,7 +84,7 @@ class RVLoginViewController: RVBaseViewController {
             }
             .map { (input: String?) -> String in return (input != nil) ? input! : "" }
             .distinctUntilChanged()
-            .throttle(3.0, scheduler: MainScheduler.instance)
+            .throttle(2.0, scheduler: MainScheduler.instance)
             .flatMap { (email) -> Observable<String> in
             return RVMeteorService.sharedInstance.rx.findAccountViaEmail(email: email.lowercased())
                 .catchErrorJustReturn("")
@@ -105,33 +105,24 @@ class RVLoginViewController: RVBaseViewController {
         }).disposed(by: rx_disposeBag)
         
         
-        /*
+        
         let passwordLookup = passwordTextField.rx.text
-            .filter {(input: String?) -> Bool in
-               // self.hideView(view: self.passwordView)
-                if let candidate = input {
-                    if let message = candidate.isValidPassword() {
-                  //      self.hideLoginRegisterButtonViews()
-                  //      self.showView(view: self.emailMessageLabel)
-                 //       self.emailMessageLabel.text = message
-                        return false
-                    } else {
-                  //      self.hideView(view: self.emailMessageLabel)
-                  //      self.showView(view: self.passwordView)
-                        return true
-                    }
-                }
-                else { return false }
-            }
             .map { (input: String?) -> String in return (input != nil) ? input! : "" }
-            .throttle(3.0, scheduler: MainScheduler.instance)
-            .flatMap { (email) -> Observable<String> in
-                return Observable<String>.just("Password")
+            .flatMap { (password) -> Observable<String> in
+                return Observable<String>.just(password)
             }
             .shareReplay(1)
             .observeOn(MainScheduler.instance)
         passwordLookup.subscribe(onNext: { (password) in
-            print("In passwordLookup with: \(password)")
+            print("In passwordLookup.subscribe with: \(password)")
+            if let message = password.isValidPassword() {
+                self.showView(view: self.passwordMessageLabel)
+                self.passwordMessageLabel.text = message
+                self.enableButtons(enable: false)
+            } else {
+                self.enableButtons(enable: true)
+                self.hideView(view: self.passwordMessageLabel)
+            }
             if password != "" {
                // self.showLoginRegisterButtonView(login: true)
             } else {
@@ -143,9 +134,12 @@ class RVLoginViewController: RVBaseViewController {
             print("In passwordLookup on Completed")
         }).disposed(by: rx_disposeBag)
         
-        */
+        
     }
-    
+    func enableButtons(enable: Bool) {
+        if let login = self.loginButton { login.isEnabled = enable }
+        if let register = self.registerButton { register.isEnabled = enable }
+    }
     func showLoginRegisterButtonView(login: Bool) {
         if let loginView = self.loginButtonView {
             loginView.isHidden = !login
@@ -163,6 +157,12 @@ class RVLoginViewController: RVBaseViewController {
         if (textField == self.emailTextField) { return "Email" }
         return "Password"
     }
+    func showHidePasswordStuff(hide: Bool) {
+        print("In \(self.classForCoder).showHidePasswordStuff \(hide)")
+        self.showHideView(view: self.passwordTextField, hide: hide)
+        if hide {self.showHideView(view: self.passwordMessageLabel, hide: hide) }
+        if hide { self.hideLoginRegisterButtonViews()}
+    }
 
 }
 
@@ -178,8 +178,8 @@ extension RVLoginViewController: UITextFieldDelegate {
         }
 
         else if textField == self.passwordTextField {
-                        KeyboardAvoiding.padding = 200
-            KeyboardAvoiding.avoidingView = self.passwordView
+                       // KeyboardAvoiding.padding = 200
+           // KeyboardAvoiding.avoidingView = self.passwordView
           //  self.showView(view: self.passwordView)
 
       //      KeyboardAvoiding.avoidingView = textField
