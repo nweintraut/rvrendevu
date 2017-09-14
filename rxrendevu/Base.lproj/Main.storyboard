@@ -231,11 +231,17 @@
                                     <constraint firstItem="3H4-Jy-S9U" firstAttribute="centerY" secondItem="xj0-O6-gM5" secondAttribute="centerY" id="e1t-ff-AH6"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4Z-k5-NXV">
+                                <rect key="frame" x="283" y="40" width="30" height="30"/>
+                                <state key="normal" title="Test"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.34957892039999999" blue="0.26400056659999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PX4-Uc-wbw" secondAttribute="trailing" constant="7" id="30S-hJ-FEJ"/>
                             <constraint firstItem="5ig-bB-I09" firstAttribute="top" secondItem="PX4-Uc-wbw" secondAttribute="bottom" constant="116" id="EqM-s1-fWh"/>
+                            <constraint firstAttribute="trailing" secondItem="h4Z-k5-NXV" secondAttribute="trailing" constant="7" id="OaY-8r-qly"/>
+                            <constraint firstItem="h4Z-k5-NXV" firstAttribute="top" secondItem="YWK-QN-GlD" secondAttribute="bottom" constant="20" id="cUO-6S-SIl"/>
                             <constraint firstItem="PX4-Uc-wbw" firstAttribute="leading" secondItem="epz-cz-FWL" secondAttribute="leading" constant="7" id="uF4-uJ-uwz"/>
                         </constraints>
                     </view>
@@ -254,6 +260,7 @@
                         <outlet property="registerButton" destination="qcD-AZ-6TB" id="mSy-Vc-eeM"/>
                         <outlet property="registerButtonView" destination="eBl-7f-8iR" id="j8t-cZ-3q6"/>
                         <outlet property="resetPasswordButton" destination="dsk-Fo-vUT" id="9DP-aX-hyy"/>
+                        <outlet property="textButton" destination="h4Z-k5-NXV" id="RAZ-fe-Alw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aih-FH-Hcc" userLabel="First Responder" sceneMemberID="firstResponder"/>

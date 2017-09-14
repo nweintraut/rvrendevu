@@ -11,6 +11,7 @@ import IHKeyboardAvoiding
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import Action
 
 class RVLoginViewController: RVBaseViewController {
     
@@ -18,6 +19,7 @@ class RVLoginViewController: RVBaseViewController {
 //    @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var textButton: UIButton!
 
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var loginButtonView: UIView!
@@ -34,6 +36,8 @@ class RVLoginViewController: RVBaseViewController {
 
     @IBOutlet weak var loginRegisterErrorView: UIView!
     @IBOutlet weak var loginRegisterErrorLabel: UILabel!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.goofyView.layer.borderWidth = 5.0
@@ -114,8 +118,8 @@ class RVLoginViewController: RVBaseViewController {
             print(error)
         }).disposed(by: rx_disposeBag)
         
+
         loginButton.rx.tap.subscribe(onNext: {_ in
-            print("In \(self.classForCoder).loginButton")
             if let email = self.emailTextField.text {
                 if let password = self.passwordTextField.text {
                      RVMeteorService.sharedInstance.rx.loginViaPassword(email: email, password: password)
