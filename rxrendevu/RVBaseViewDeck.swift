@@ -8,9 +8,15 @@
 
 import UIKit
 import ViewDeck
+import RxSwift
 
 class RVViewDeckController: IIViewDeckController {
     var navigator = RVViewDeckNavigator()
+    var viewLoadedSubject: PublishSubject<Void> = PublishSubject<Void>()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewLoadedSubject.onCompleted()
+    }
 }
 
 

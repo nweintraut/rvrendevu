@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
 protocol RVPropogateProtocol: class {
+    var viewLoadedSubject: PublishSubject<Void> { get }
     func newRoute(level: Int, newRoute: RVRoute) -> Void
 }

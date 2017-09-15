@@ -18,6 +18,10 @@ class RVViewDeck: RVNSObject, RVControllerProtocol {
     static let sharedInstance: RVViewDeck = { return RVViewDeck()} ()
     internal        var childControllerProfile: RVControllerProfile?    = nil
     internal weak   var childController:        UIViewController?       = nil
+    override init() {
+        super.init()
+        deckController.delegate = self
+    }
     var deckController: RVViewDeckController = RVViewDeckController()
     
     let router = RVRouter()

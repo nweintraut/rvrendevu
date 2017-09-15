@@ -14,7 +14,7 @@ import NSObject_Rx
 import Action
 
 class RVLoginViewController: RVBaseViewController {
-
+    var navigator = RVLoginNavigator()
     @IBOutlet weak var goofyView: UIView!
     @IBOutlet weak var emailMessageLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -31,7 +31,11 @@ class RVLoginViewController: RVBaseViewController {
     var viewModel = RVLoginViewModel()
     let passwordTextEvaluator   = RVPasswordTextEvalutor()
     let emailTextEvaluator      = RVEmailTextEvaluator()
-    
+    override func newRoute(level: Int, newRoute: RVRoute) -> Void {
+       // print("IN \(self.classForCoder).RVBaseViewController.newRoute need to implement")
+        self.navigator.newRoute(level: level, newRoute: newRoute)
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

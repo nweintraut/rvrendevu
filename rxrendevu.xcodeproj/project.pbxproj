@@ -38,12 +38,13 @@
 		286DA42A1F6AE98800E8AF74 /* RVScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4291F6AE98800E8AF74 /* RVScene.swift */; };
 		286DA42C1F6AF68C00E8AF74 /* RVNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */; };
 		286DA42E1F6AF85500E8AF74 /* RVSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */; };
-		286DA4301F6B056D00E8AF74 /* RVNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42F1F6B056D00E8AF74 /* RVNavigator.swift */; };
+		286DA4301F6B056D00E8AF74 /* RVBaseNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA42F1F6B056D00E8AF74 /* RVBaseNavigator.swift */; };
 		286DA4321F6B07A800E8AF74 /* RVPropogateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4311F6B07A800E8AF74 /* RVPropogateProtocol.swift */; };
 		286DA4341F6B2A0A00E8AF74 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4331F6B2A0A00E8AF74 /* AppDelegate+Extension.swift */; };
 		286DA4371F6B2BEB00E8AF74 /* RVAppDelegateNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4361F6B2BEB00E8AF74 /* RVAppDelegateNavigator.swift */; };
 		286DA4391F6B2C8E00E8AF74 /* RVBaseViewDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA4381F6B2C8E00E8AF74 /* RVBaseViewDeck.swift */; };
 		286DA43B1F6B2CDA00E8AF74 /* RVViewDeckNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA43A1F6B2CDA00E8AF74 /* RVViewDeckNavigator.swift */; };
+		286DA43D1F6B610800E8AF74 /* RVLoginNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DA43C1F6B610800E8AF74 /* RVLoginNavigator.swift */; };
 		286EFE0E1F5D0CE800FAB2DC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE0D1F5D0CE800FAB2DC /* UIViewController+Extensions.swift */; };
 		286EFE101F5D0DAA00FAB2DC /* RVAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE0F1F5D0DAA00FAB2DC /* RVAsyncOperation.swift */; };
 		286EFE121F5D0FFC00FAB2DC /* RVOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286EFE111F5D0FFC00FAB2DC /* RVOperationQueue.swift */; };
@@ -61,6 +62,7 @@
 		28BF4F301F5C678E00E3FF1D /* RVRoutePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4F2F1F5C678E00E3FF1D /* RVRoutePath.swift */; };
 		28BF4F321F5C681700E3FF1D /* RVRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4F311F5C681700E3FF1D /* RVRouter.swift */; };
 		28BF4F341F5C687100E3FF1D /* RVRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BF4F331F5C687100E3FF1D /* RVRoute.swift */; };
+		28F85AFB1F6B8E8900F536E8 /* RVRouteOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F85AFA1F6B8E8900F536E8 /* RVRouteOperation.swift */; };
 		28FCEADE1F5BBAA000B0FA7A /* RVMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCEADD1F5BBAA000B0FA7A /* RVMainViewController.swift */; };
 		28FCEAE11F5BBD5200B0FA7A /* RVMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FCEAE01F5BBD5200B0FA7A /* RVMenuViewController.swift */; };
 		5E488B9FE804D20861A34D61 /* Pods_rxrendevuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4986C937DA99C630A2D0993F /* Pods_rxrendevuTests.framework */; };
@@ -118,12 +120,13 @@
 		286DA4291F6AE98800E8AF74 /* RVScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVScene.swift; sourceTree = "<group>"; };
 		286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVNavigationType.swift; sourceTree = "<group>"; };
 		286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSceneCoordinator.swift; sourceTree = "<group>"; };
-		286DA42F1F6B056D00E8AF74 /* RVNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVNavigator.swift; sourceTree = "<group>"; };
+		286DA42F1F6B056D00E8AF74 /* RVBaseNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBaseNavigator.swift; sourceTree = "<group>"; };
 		286DA4311F6B07A800E8AF74 /* RVPropogateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVPropogateProtocol.swift; sourceTree = "<group>"; };
 		286DA4331F6B2A0A00E8AF74 /* AppDelegate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Extension.swift"; sourceTree = "<group>"; };
 		286DA4361F6B2BEB00E8AF74 /* RVAppDelegateNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVAppDelegateNavigator.swift; sourceTree = "<group>"; };
 		286DA4381F6B2C8E00E8AF74 /* RVBaseViewDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVBaseViewDeck.swift; sourceTree = "<group>"; };
 		286DA43A1F6B2CDA00E8AF74 /* RVViewDeckNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVViewDeckNavigator.swift; sourceTree = "<group>"; };
+		286DA43C1F6B610800E8AF74 /* RVLoginNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVLoginNavigator.swift; sourceTree = "<group>"; };
 		286EFE0D1F5D0CE800FAB2DC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		286EFE0F1F5D0DAA00FAB2DC /* RVAsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVAsyncOperation.swift; sourceTree = "<group>"; };
 		286EFE111F5D0FFC00FAB2DC /* RVOperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVOperationQueue.swift; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		28BF4F2F1F5C678E00E3FF1D /* RVRoutePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVRoutePath.swift; sourceTree = "<group>"; };
 		28BF4F311F5C681700E3FF1D /* RVRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVRouter.swift; sourceTree = "<group>"; };
 		28BF4F331F5C687100E3FF1D /* RVRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVRoute.swift; sourceTree = "<group>"; };
+		28F85AFA1F6B8E8900F536E8 /* RVRouteOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVRouteOperation.swift; sourceTree = "<group>"; };
 		28FCEADD1F5BBAA000B0FA7A /* RVMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVMainViewController.swift; sourceTree = "<group>"; };
 		28FCEAE01F5BBD5200B0FA7A /* RVMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVMenuViewController.swift; sourceTree = "<group>"; };
 		3B0D2776A1F853466BAEC769 /* Pods-rxrendevuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rxrendevuTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rxrendevuTests/Pods-rxrendevuTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 		286C42AC1F5B9787008C01C3 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
+				286DA42F1F6B056D00E8AF74 /* RVBaseNavigator.swift */,
 				286C42AA1F5B95BB008C01C3 /* RVBaseViewController.swift */,
 				286C42AD1F5B9CA3008C01C3 /* RVBaseNavController.swift */,
 				286C42AF1F5B9CD3008C01C3 /* RVBaseTabBarViewController.swift */,
@@ -285,7 +290,6 @@
 				286DA4291F6AE98800E8AF74 /* RVScene.swift */,
 				286DA42B1F6AF68C00E8AF74 /* RVNavigationType.swift */,
 				286DA42D1F6AF85500E8AF74 /* RVSceneCoordinator.swift */,
-				286DA42F1F6B056D00E8AF74 /* RVNavigator.swift */,
 				286DA4311F6B07A800E8AF74 /* RVPropogateProtocol.swift */,
 			);
 			name = Navigation;
@@ -297,6 +301,7 @@
 				28971B621F59F5A500EB19FD /* AppDelegate.swift */,
 				286DA4331F6B2A0A00E8AF74 /* AppDelegate+Extension.swift */,
 				286DA4361F6B2BEB00E8AF74 /* RVAppDelegateNavigator.swift */,
+				28F85AFA1F6B8E8900F536E8 /* RVRouteOperation.swift */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 				281703E51F684E9200F4501D /* RVTextFieldProxy.swift */,
 				2816497B1F698D4F0053F954 /* RVEmailTextEvaluator.swift */,
 				2816497D1F69A8DA0053F954 /* RVLoginViewModel.swift */,
+				286DA43C1F6B610800E8AF74 /* RVLoginNavigator.swift */,
 			);
 			name = LoginScene;
 			sourceTree = "<group>";
@@ -704,6 +710,7 @@
 				286DA4261F6AE88500E8AF74 /* RVSceneTransitionType.swift in Sources */,
 				28FCEADE1F5BBAA000B0FA7A /* RVMainViewController.swift in Sources */,
 				286DA42C1F6AF68C00E8AF74 /* RVNavigationType.swift in Sources */,
+				28F85AFB1F6B8E8900F536E8 /* RVRouteOperation.swift in Sources */,
 				286C428D1F5A10D3008C01C3 /* RVMeteorCredentials.swift in Sources */,
 				286C42891F59FDDF008C01C3 /* RVError.swift in Sources */,
 				286C42A71F5B8DAC008C01C3 /* RVControllerProfile.swift in Sources */,
@@ -725,6 +732,7 @@
 				286C42851F59FC23008C01C3 /* RXSwiftDDP.swift in Sources */,
 				28971B631F59F5A500EB19FD /* AppDelegate.swift in Sources */,
 				286DA4281F6AE93F00E8AF74 /* RVSceneCoordinatorType.swift in Sources */,
+				286DA43D1F6B610800E8AF74 /* RVLoginNavigator.swift in Sources */,
 				286C42A51F5B8D66008C01C3 /* RVControllerFactory.swift in Sources */,
 				286EFE161F5D162400FAB2DC /* RVViewDeckRouteOperation.swift in Sources */,
 				28BF4F321F5C681700E3FF1D /* RVRouter.swift in Sources */,
@@ -745,7 +753,7 @@
 				286EFE0E1F5D0CE800FAB2DC /* UIViewController+Extensions.swift in Sources */,
 				286DA42E1F6AF85500E8AF74 /* RVSceneCoordinator.swift in Sources */,
 				286C42AE1F5B9CA3008C01C3 /* RVBaseNavController.swift in Sources */,
-				286DA4301F6B056D00E8AF74 /* RVNavigator.swift in Sources */,
+				286DA4301F6B056D00E8AF74 /* RVBaseNavigator.swift in Sources */,
 				286DA4371F6B2BEB00E8AF74 /* RVAppDelegateNavigator.swift in Sources */,
 				281649801F69B32B0053F954 /* RVUserProfile+RxExtension.swift in Sources */,
 				286EFE141F5D120500FAB2DC /* RVAsyncRouteOperation.swift in Sources */,

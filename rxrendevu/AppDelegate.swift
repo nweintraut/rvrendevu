@@ -11,6 +11,8 @@ import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+
     var window: UIWindow?
     var navigator = RVAppDelegateNavigator()
 
