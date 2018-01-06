@@ -7,7 +7,7 @@ target 'rxrendevu' do
 
 
   # Pods for rxrendevu
-
+  	pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift"
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'Action'
@@ -19,7 +19,8 @@ target 'rxrendevu' do
     pod 'Reachability'
     pod 'Kingfisher'
     pod 'RxRealmDataSources'
-    pod "SwiftDDP"
+  #  pod "SwiftDDP", '~> 0.4.1'
+        pod "SwiftDDP"
     pod 'ViewDeck'
     pod 'TPKeyboardAvoiding'
     pod 'LoremIpsum'
